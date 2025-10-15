@@ -1,0 +1,71 @@
+# ─────────────────────────────────────────
+# Hugo
+# ─────────────────────────────────────────
+/public/                 # Salida del build (la genera Hugo)
+/resources/              # Caché de transformaciones (imágenes, SCSS, minificación)
+.hugo_build.lock
+hugo_stats.json          # Si usas Tailwind/critters/etc.
+
+# Si algún día decides publicar el sitio subiendo "public/" (no recomendado con GH Actions),
+# comenta la línea /public/ de arriba.
+
+# ─────────────────────────────────────────
+# Node / JS tooling (opcional, por si usas linters, bundlers…)
+# ─────────────────────────────────────────
+node_modules/
+.pnpm-store/
+.npm/
+.yarn/
+.cache/
+dist/
+build/
+*.tsbuildinfo
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ─────────────────────────────────────────
+# Entornos / secretos
+# ─────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ─────────────────────────────────────────
+# Sistemas operativos
+# ─────────────────────────────────────────
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ─────────────────────────────────────────
+# Editores/IDEs
+# ─────────────────────────────────────────
+.vscode/
+!.vscode/extensions.json   # opcional: permite recomendar extensiones sin subir tu config personal
+.idea/
+*.iml
+
+# Vim/Emacs
+*~
+*.swp
+*.swo
+.#*
+
+# ─────────────────────────────────────────
+# Otros artefactos temporales
+# ─────────────────────────────────────────
+*.tmp
+*.temp
+*.bak
