@@ -20,15 +20,35 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          submodules: 'recursive'
-          fetch-depth: 0  
-      - uses: actions/configure-pages@v5
+          submodules: 'recursive'   # si el tema está como submódulo
+          fetch-depth: 0
+
+      # Habilita Pages (por si no lo hiciste en Settings)
+      - id: pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      # (Opcional) Si usas Hugo Modules
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.22.x'
+      - name: Vendor Hugo modules (safe no-op si no usas mods)
+        run: hugo mod vendor || true
+
       - uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: 'latest'
           extended: true
+
       - name: Build
-        run: hugo --minify
+        # Para project pages: genera con base_url correcto (ej: https://adrirrp.github.io/quihacker.site/)
+        run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+        # ───────────────────────────────────────────────────────────────
+        # Cuando pases a dominio propio (quihacker.site), usa en su lugar:
+        # run: hugo --minify --baseURL "https://quihacker.site/"
+        # ───────────────────────────────────────────────────────────────
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
