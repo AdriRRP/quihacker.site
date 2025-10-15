@@ -1,0 +1,10 @@
+company   = "Everis"
+title     = "Data Engineer | Solution Assistant"
+url       = "https://es.nttdata.com/"
+start     = "2017-01"
+end       = "2018-06"
+role_icon = "/images/role/data-engineer.png"
+highlights = [
+  "Large-scale data engineering for banks: batch pipelines with Spark and near-real-time with Kafka/HBase on Cloudera.",
+  "Supported critical risk/analytics workloads at scale."
+]

@@ -1,0 +1,11 @@
+company   = "Banco Santander"
+title     = "Software/Data Engineer | Counterparty Credit Risk"
+url       = "https://www.santander.com/"
+start     = "2018-06"
+end       = "2021-06"
+role_icon = "/images/role/sw-engineer.png"
+highlights = [
+  "Diseño e implementación de motores de cálculo de riesgo (CEM, SA-CCR, Settlement Risk; métricas como EAD) conformes a regulación.",
+  "Framework unificado en Spark para motores de riesgo, colaborando con quants y negocio.",
+  "Aceleraciones: de 2h a 15min (PySpark) y ~5s en PoC en C; frontales con Python/Django/Gunicorn."
+]

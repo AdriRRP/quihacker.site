@@ -1,0 +1,10 @@
+company   = "Stratio"
+title     = "Senior Software Engineer | Product | Data Governance Team"
+url       = "https://www.stratio.com"
+start     = "2024-06"
+end       = "2025-05"
+role_icon = "/images/role/sw-engineer.png"
+highlights = [
+  "Contributed to the core Data Governance platform (discovery, metadata enrichment, ontology-based modeling).",
+  "Fixed critical bugs and optimized the knowledge-graph query engine (ontologies, metadata, datasets, views, business concepts)."
+]

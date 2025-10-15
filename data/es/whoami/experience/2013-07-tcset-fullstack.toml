@@ -1,0 +1,10 @@
+company   = "TCSET"
+title     = "Full-Stack Developer | Software Startup"
+url       = "https://web.archive.org/web/20190330161631/http://www.tcset.com"
+start     = "2013-07"
+end       = "2014-06"
+role_icon = "/images/role/full-stack.png"
+highlights = [
+  "Proyecto end-to-end: reuniones, planificación, desarrollo y entrega.",
+  "Apps móviles cross-platform (Titanium/JS) y escritorio (JavaFX); Git server y coordinación de becarios (proto-DevOps)."
+]

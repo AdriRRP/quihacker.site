@@ -1,0 +1,10 @@
+company   = "Stratio"
+title     = "Data Engineer | Integration | Retail"
+url       = "https://www.stratio.com"
+start     = "2021-10"
+end       = "2021-12"
+role_icon = "/images/role/data-engineer.png"
+highlights = [
+  "Optimización de jobs Spark para forecasting y gestión de tickets a nivel nacional.",
+  "Análisis y tuning de planes de ejecución para mejorar rendimiento y escalabilidad."
+]

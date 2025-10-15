@@ -1,0 +1,10 @@
+company   = "Stratio"
+title     = "Senior Software Engineer | Integration | Banking"
+url       = "https://www.stratio.com"
+start     = "2021-06"
+end       = "2021-10"
+role_icon = "/images/role/sw-engineer.png"
+highlights = [
+  "Integrated Stratio’s platform with a banking client’s ad-hoc Spark systems.",
+  "Designed a hybrid Spark architecture (on-prem + platform) for interoperability."
+]

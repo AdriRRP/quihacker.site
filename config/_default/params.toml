@@ -1,0 +1,26 @@
+label.icon = "/images/logo.png"
+label.iconHeight = 45
+
+[assets]
+favicon          = "/favicon.ico"
+favicon16x16     = "/favicon-16x16.png"
+favicon32x32     = "/favicon-32x32.png"
+apple_touch_icon = "/apple-touch-icon.png"
+safari_pinned_tab = "/favicon-32x32.png"
+
+[profileMode]
+enabled = true
+imageUrl = "/images/logo.png"
+imageTitle = "QuiHacker"
+imageWidth = 240
+imageHeight = 240
+
+[[profileMode.buttons]]
+name = "👤 Whoami"
+url = "/whoami"
+[[socialIcons]]
+name = "LinkedIn"
+url = "https://www.linkedin.com/in/adrian-ramos-rp"
+[[socialIcons]]
+name = "GitHub"
+url = "https://github.com/AdriRRP"

@@ -1,0 +1,127 @@
+.whoami-exp { 
+  margin-top: 2rem; 
+}
+
+.whoami-exp__title { 
+  font-size: 1.75rem; 
+  font-weight: 700; 
+  margin-bottom: 1rem; 
+}
+
+.whoami-exp__groups { 
+  display: grid; 
+  gap: 1.5rem; 
+}
+
+.whoami-company { 
+  border: 1px solid var(--border); 
+  border-radius: 12px; 
+  padding: 1.25rem; 
+  background: var(--theme); 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06); 
+}
+
+.whoami-company__header { 
+  display: flex; 
+  gap: 1rem; 
+  align-items: center; 
+  border-bottom: 1px solid var(--border); 
+  padding-bottom: .75rem; 
+  margin-bottom: .75rem; 
+}
+
+.whoami-company__logo img { 
+  width: 50px; 
+  height: 50px; 
+  object-fit: contain; 
+  border-radius: 8px; 
+  background: #fff; 
+  padding: 4px; 
+  box-shadow: 0 2px 6px rgba(0,0,0,.1); 
+}
+
+.whoami-company__name { 
+  font-weight: 700; 
+  font-size: 1.1rem; 
+}
+
+.whoami-company__period { 
+  font-size: .9rem; 
+  opacity: .75; 
+  margin-top: .2rem; 
+}
+
+/* Timeline */
+.whoami-timeline { 
+  position: relative; 
+  margin-top: .75rem; 
+  padding-left: 2.75rem; 
+}
+
+.whoami-timeline::before { 
+  content: ""; 
+  position: absolute; 
+  left: 1.25rem; 
+  top: .5rem; 
+  bottom: .5rem; 
+  width: 3px; 
+  background: linear-gradient(var(--secondary), transparent); 
+  border-radius: 2px; 
+  opacity: 0.3; 
+}
+
+/* Role items */
+.whoami-role { 
+  position: relative; 
+  margin: 1rem 0; 
+}
+
+.whoami-role__dot { 
+  position: absolute; 
+  left: -0.15rem; 
+  top: -0.1rem;                        /* sutil ajuste vertical */
+  width: 44px;                         /* antes 32px */
+  height: 44px; 
+  border-radius: 50%; 
+  background: radial-gradient(
+    rgba(255,255,255,0.95) 0%,
+    rgba(255,255,255,0.80) 35%,
+    rgba(255,255,255,0.00) 70%
+  );
+  border: none;                        /* sin marco */
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15); 
+}
+
+.whoami-role__dot img { 
+  width: 40px; 
+  height: 40px; 
+  object-fit: contain; 
+}
+
+.whoami-role__body { 
+  margin-left: 3rem; 
+}
+
+.whoami-role__title { 
+  font-weight: 600; 
+  font-size: 1rem; 
+}
+
+.whoami-role__dates { 
+  font-size: .85rem; 
+  opacity: .75; 
+  margin-top: .15rem; 
+}
+
+.whoami-role__highlights { 
+  margin: .4rem 0 0 0; 
+  padding-left: 1.25rem; 
+}
+
+.whoami-role__highlights li { 
+  margin: .25rem 0; 
+  line-height: 1.35; 
+}

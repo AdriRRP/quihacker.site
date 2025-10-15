@@ -1,0 +1,9 @@
+company   = "Color Vivo Internet S.L."
+title     = "Web Development Intern | First Professional Experience"
+url       = "https://colorvivo.com/"
+start     = "2010-04"
+end       = "2010-06"
+role_icon = "/images/role/full-stack.png"
+highlights = [
+  "First professional IT role after vocational training: MySQL, internal CMS and content translation automation (incl. gaming portals)."
+]

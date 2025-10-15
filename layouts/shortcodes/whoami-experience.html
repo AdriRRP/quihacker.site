@@ -1,0 +1,218 @@
+{{- /* whoami-experience: fusiona periodos solapados/contiguos por empresa y ordena como LinkedIn */ -}}
+{{- $lang := .Page.Lang -}}
+{{- $dir  := index site.Data $lang "whoami" "experience" | default dict -}}
+
+{{- /* 1) Cargar y normalizar ítems */ -}}
+{{- $items := slice -}}
+{{- range $k, $v := $dir }}
+  {{- $end := $v.end | default "" -}}
+  {{- $isCurrent := or (eq (lower (print $end)) "presente") (eq (lower (print $end)) "present") -}}
+  {{- $items = $items | append (merge $v (dict "_isCurrent" $isCurrent)) -}}
+{{- end -}}
+
+{{- /* 2) Mapear por empresa */ -}}
+{{- $byCompany := dict -}}
+{{- range $items -}}
+  {{- $cid := or .company_id (.company | urlize) -}}
+  {{- $arr := (index $byCompany $cid) | default (slice) -}}
+  {{- $arr = $arr | append . -}}
+  {{- $byCompany = merge $byCompany (dict $cid $arr) -}}
+{{- end -}}
+
+{{- /* 3) Para cada empresa, ordenar roles por start y crear segmentos fusionando solapes/contiguos */ -}}
+{{- $segments := slice -}}
+{{- range $cid, $rolesAll := $byCompany -}}
+  {{- $roles := sort $rolesAll "start" "asc" -}}
+
+  {{- /* Variables del segmento en curso */ -}}
+  {{- $segRoles := slice -}}
+  {{- $segStart := "" -}}
+  {{- $segEndDisplay := "" -}}
+  {{- $segEndComp := "" -}}
+  {{- $segIsCurrent := false -}}
+
+  {{- range $roles -}}
+    {{- $rStart := .start -}}
+    {{- $rEndDisplay := .end | default "" -}}
+    {{- $rEndLower := lower (print $rEndDisplay) -}}
+    {{- $rEndComp := cond (or (eq $rEndLower "presente") (eq $rEndLower "present")) "9999-12" $rEndDisplay -}}
+    {{- $rIsCurrent := or (eq $rEndLower "presente") (eq $rEndLower "present") -}}
+
+    {{- if eq (len $segRoles) 0 -}}
+      {{- /* iniciar segmento */ -}}
+      {{- $segRoles = slice . -}}
+      {{- $segStart = $rStart -}}
+      {{- $segEndDisplay = $rEndDisplay -}}
+      {{- $segEndComp = $rEndComp -}}
+      {{- $segIsCurrent = $rIsCurrent -}}
+    {{- else -}}
+      {{- /* calcular índices Y*12+M para fin de segmento y comienzo del rol */ -}}
+      {{- $segParts := split $segEndComp "-" -}}
+      {{- $segY := int (index $segParts 0) -}}
+      {{- $segM := int (replaceRE "^0+" "" (index $segParts 1)) -}}
+      {{- $segIdx := add (mul $segY 12) $segM -}}
+
+      {{- $rParts := split $rStart "-" -}}
+      {{- $rY := int (index $rParts 0) -}}
+      {{- $rM := int (replaceRE "^0+" "" (index $rParts 1)) -}}
+      {{- $rIdx := add (mul $rY 12) $rM -}}
+
+      {{- $isAdjacent := eq $rIdx (add $segIdx 1) -}}
+      {{- $overlapOrSame := le $rIdx $segIdx -}}
+
+      {{- if or $overlapOrSame $isAdjacent -}}
+        {{- /* fusionar */ -}}
+        {{- $segRoles = $segRoles | append . -}}
+        {{- if lt $segEndComp $rEndComp -}}
+          {{- $segEndComp = $rEndComp -}}
+          {{- $segEndDisplay = $rEndDisplay -}}
+        {{- end -}}
+        {{- if $rIsCurrent -}}{{- $segIsCurrent = true -}}{{- end -}}
+      {{- else -}}
+        {{- /* cerrar segmento actual y empezar uno nuevo */ -}}
+        {{- $segments = $segments | append (dict
+            "company"    (index $segRoles 0).company
+            "company_id" (or (index $segRoles 0).company_id ((index $segRoles 0).company | urlize))
+            "roles"      (sort $segRoles "start" "asc")
+            "_startMin"  $segStart
+            "_endMax"    $segEndDisplay
+            "_endComp"   $segEndComp
+            "_isCurrent" $segIsCurrent
+          ) -}}
+        {{- $segRoles = slice . -}}
+        {{- $segStart = $rStart -}}
+        {{- $segEndDisplay = $rEndDisplay -}}
+        {{- $segEndComp = $rEndComp -}}
+        {{- $segIsCurrent = $rIsCurrent -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- /* empujar último segmento de la empresa si existe */ -}}
+  {{- if gt (len $segRoles) 0 -}}
+    {{- $segments = $segments | append (dict
+        "company"    (index $segRoles 0).company
+        "company_id" (or (index $segRoles 0).company_id ((index $segRoles 0).company | urlize))
+        "roles"      (sort $segRoles "start" "asc")
+        "_startMin"  $segStart
+        "_endMax"    $segEndDisplay
+        "_endComp"   $segEndComp
+        "_isCurrent" $segIsCurrent
+      ) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* 4) Enriquecer con duración (meses) para “actuales” */ -}}
+{{- $ny := int (dateFormat "2006" now) -}}
+{{- $nm := int (dateFormat "1"   now) -}} {{/* mes sin cero inicial */}}
+{{- $enriched := slice -}}
+{{- range $segments -}}
+  {{- $durMonths := 0 -}}
+  {{- if ._isCurrent -}}
+    {{- $parts := split ._startMin "-" -}}
+    {{- $sy := int (index $parts 0) -}}
+    {{- $sm := int (replaceRE "^0+" "" (index $parts 1)) -}}
+    {{- $nowMon := add (mul $ny 12) $nm -}}
+    {{- $begMon := add (mul $sy 12) $sm -}}
+    {{- $durMonths = sub $nowMon $begMon -}}
+  {{- end -}}
+  {{- $enriched = $enriched | append (merge . (dict "_durMonths" $durMonths)) -}}
+{{- end -}}
+
+{{- /* 5) Orden global: actuales primero (duración desc, luego inicio asc); resto por fin desc */ -}}
+{{- $currents := where $enriched "_isCurrent" true -}}
+{{- $noncurr  := where $enriched "_isCurrent" false -}}
+{{- $currents = sort (sort $currents "_durMonths" "desc") "_startMin" "asc" -}}
+{{- $noncurr  = sort $noncurr "_endComp" "desc" -}}
+{{- $ordered := $currents -}}
+{{- range $noncurr }}{{- $ordered = $ordered | append . -}}{{- end -}}
+
+{{- /* Diccionario de compañías (opcional) */ -}}
+{{- $companies := index site.Data $lang "whoami" "companies" | default dict -}}
+{{- $title := i18n "whoami_experience" | default "Experience" -}}
+
+<section class="whoami-exp">
+  <h2 class="whoami-exp__title">{{ $title }}</h2>
+  <div class="whoami-exp__groups">
+    {{- range $ordered -}}
+      {{- $cid := .company_id -}}
+      {{- $meta := index $companies $cid | default dict -}}
+      {{- $name := or $meta.name .company -}}
+      {{- $url  := or $meta.url  "" -}}
+
+      {{- /* Logo de empresa con fallback */ -}}
+      {{- $companyFile := printf "images/corp/%s.png" (lower $cid) -}}
+      {{- $companyFs   := printf "static/%s" $companyFile -}}
+      {{- $logo := cond (fileExists $companyFs) $companyFile "images/logo.png" -}}
+
+      {{- /* Cabecera del bloque: rango total ascendente */ -}}
+      {{- $rolesAsc := sort .roles "start" "asc" -}}
+      {{- $periodStart := index (index $rolesAsc 0) "start" -}}
+      {{- $periodEnd   := (index (index (last 1 $rolesAsc) 0) "end") | default "" -}}
+
+      {{/* Seleccionar la última URL definida: primero meta.url y luego se sobreescribe si algún rol la trae */}}
+      {{- $url := or $meta.url "" -}}
+      {{- range $rolesAsc -}}
+        {{- with .url -}}
+          {{- $url = . -}}
+        {{- end -}}
+      {{- end -}}
+
+      <article class="whoami-company">
+
+        <header class="whoami-company__header">
+          <div class="whoami-company__logo">
+            {{- if $url -}}<a href="{{ $url }}" target="_blank" rel="noopener">{{- end -}}
+              <img src="{{ $logo | relURL }}" alt="{{ $name }} logo" loading="lazy" />
+            {{- if $url -}}</a>{{- end -}}
+          </div>
+          <div class="whoami-company__meta">
+            <div class="whoami-company__name">
+              {{- if $url -}}
+                <a href="{{ $url }}" target="_blank" rel="noopener">{{ $name }}</a>
+              {{- else -}}
+                {{ $name }}
+              {{- end -}}
+            </div>
+            <div class="whoami-company__period">{{ $periodStart }} — {{ $periodEnd }}</div>
+          </div>
+        </header>
+
+        {{/* ---- ORDENAR ROLES DENTRO DEL BLOQUE: lo último primero ---- */}}
+        {{- $rolesDisp := slice -}}
+        {{- range $rolesAsc }}
+          {{- $endLower := lower (print .end) -}}
+          {{- $endComp  := cond (or (eq $endLower "presente") (eq $endLower "present"))
+                               "9999-12"
+                               (.end | default "0000-00") -}}
+          {{- $rolesDisp = $rolesDisp | append (merge . (dict "_endComp" $endComp)) -}}
+        {{- end -}}
+        {{- $rolesDisp = sort (sort $rolesDisp "_endComp" "desc") "start" "desc" -}}
+
+        <div class="whoami-timeline">
+          {{- range $rolesDisp -}}
+            {{- /* Icono de rol con fallback */ -}}
+            {{- $ri := or .role_icon "images/logo.png" -}}
+            {{- $riFs := printf "static/%s" (trim $ri "/") -}}
+            {{- $roleIcon := cond (fileExists $riFs) $ri "images/logo.png" -}}
+
+            <div class="whoami-role">
+              <div class="whoami-role__dot">
+                <img src="{{ $roleIcon | relURL }}" alt="role icon" />
+              </div>
+              <div class="whoami-role__body">
+                <div class="whoami-role__title">{{ .title }}</div>
+                <div class="whoami-role__dates">{{ .start }} — {{ .end }}</div>
+                {{- with .highlights -}}
+                  <ul class="whoami-role__highlights">
+                    {{- range . -}}<li>{{ . }}</li>{{- end -}}
+                  </ul>
+                {{- end -}}
+              </div>
+            </div>
+          {{- end -}}
+        </div>
+      </article>
+    {{- end -}}
+  </div>
+</section>

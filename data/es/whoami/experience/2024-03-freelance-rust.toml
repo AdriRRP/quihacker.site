@@ -1,0 +1,10 @@
+company   = "Freelance"
+title     = "Software Architect/Engineer | Fullstack Rust Developer 🦀"
+url       = "https://github.com/AdriRRP"
+start     = "2024-03"
+end       = "2024-09"
+role_icon = "/images/role/full-stack.png"
+highlights = [
+  "App fullstack en Rust para telemetría post-carrera (backend Axum/Tokio; frontend Yew/WebAssembly) con arquitectura hexagonal y DDD.",
+  "Repo: https://github.com/AdriRRP/simracing-virtual-mentor"
+]

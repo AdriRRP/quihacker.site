@@ -1,0 +1,10 @@
+company   = "Stratio"
+title     = "Senior Software Engineer | Product | Data Market Team"
+url       = "https://www.stratio.com"
+start     = "2024-01"
+end       = "2024-06"
+role_icon = "/images/role/sw-engineer.png"
+highlights = [
+  "Maintained and enhanced the Data Marketplace (Java, Spring Boot) for data catalogs and sharing contracts.",
+  "Aligned with Gartner recommendations for data monetization and governance, ensuring secure and compliant transactions."
+]

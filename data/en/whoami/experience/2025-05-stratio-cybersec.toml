@@ -1,0 +1,9 @@
+company   = "Stratio"
+title     = "Cybersecurity Analyst | Offensive Security & Vulnerability Management | Rustacean 🦀"
+url       = "https://www.stratio.com"
+start     = "2025-05"
+end       = "Present"
+highlights = [
+  "Led the creation of VENOM: Stratio’s internal vulnerability orchestration platform (SBOMs, detection, contextual reclassification, remediation) using an event-driven, actor-based architecture (Rust, Actix, CQRS, Event Sourcing).",
+  "Performed offensive assessments of the platform (controlled attacks, privilege escalations, exploitation exercises) to identify and fix weaknesses pre-production."
+]

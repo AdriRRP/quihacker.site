@@ -1,0 +1,11 @@
+/* para la lista de traducciones */
+.i18n_list a { 
+  font-size: 1.1rem; 
+  line-height: 1; 
+}
+
+/* si usas el switch en navbar con clase .lang-switch */
+.lang-switch a { 
+  font-size: 1.4rem; 
+  line-height: 1; 
+}

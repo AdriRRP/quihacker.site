@@ -1,0 +1,6 @@
+languageName = "🇪🇸"
+weight = 1
+
+[params]
+displayFullLangName = true
+subtitle = "Compilando entropía, explotando el caos."

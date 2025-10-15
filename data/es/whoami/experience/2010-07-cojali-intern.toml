@@ -1,0 +1,10 @@
+company   = "Cojali S.L."
+title     = "Software Developer Intern | Automotive"
+url       = "https://www.cojali.com/"
+start     = "2010-07"
+end       = "2010-09"
+role_icon = "/images/role/sw-engineer.png"
+highlights = [
+  "Apps de escritorio con .NET/C# y LINQ; backend en Microsoft SQL Server.",
+  "Diseño de GUIs y prácticas de desarrollo enterprise en automoción."
+]

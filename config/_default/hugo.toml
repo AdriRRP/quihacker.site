@@ -1,0 +1,5 @@
+title = "Quihacker's Lab"
+baseURL = 'https://quihacker.site/'
+languageCode = 'es-ES'
+defaultContentLanguage = 'es'
+theme = 'PaperMod'

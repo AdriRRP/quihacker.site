@@ -1,0 +1,10 @@
+company   = "Stratio"
+title     = "Senior Software Engineer | Product | Connectors Team"
+url       = "https://www.stratio.com"
+start     = "2022-01"
+end       = "2023-12"
+role_icon = "/images/role/sw-engineer.png"
+highlights = [
+  "Desarrollo de conectores de datos (Oracle, MongoDB, AWS S3, GCP, Azure) y flujos de autenticación/autorización sobre interfaz en Scala con Vault.",
+  "Contribución a un fork de Apache Spark y extensión de la capa Hadoop FS para soportar conectores."
+]

@@ -1,0 +1,10 @@
+company   = "Color Vivo Internet S.L."
+title     = "Web Developer Intern | CMS & Front-End"
+url       = "https://colorvivo.com/"
+start     = "2015-07"
+end       = "2015-09"
+role_icon = "/images/role/full-stack.png"
+highlights = [
+  "Desarrollo/mantenimiento de webs (PHP, CMS propio, Joomla) y publicación de programacion.net.",
+  "Widget de calendario en JavaScript y contenidos para blogs."
+]
