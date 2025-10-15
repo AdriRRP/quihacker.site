@@ -43,7 +43,8 @@ jobs:
 
       - name: Build
         # Para project pages: genera con base_url correcto (ej: https://adrirrp.github.io/quihacker.site/)
-        run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+        # run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+        run: hugo --minify --baseURL "https://quihacker.site/"
         # ───────────────────────────────────────────────────────────────
         # Cuando pases a dominio propio (quihacker.site), usa en su lugar:
         # run: hugo --minify --baseURL "https://quihacker.site/"
