@@ -69,3 +69,6 @@ Desktop.ini
 *.tmp
 *.temp
 *.bak
+public/
+resources/
+.hugo_build.lock
