@@ -10,10 +10,10 @@ safari_pinned_tab = "/favicon-32x32.png"
 
 [profileMode]
 enabled = true
-imageUrl = "/images/logo.png"
-imageTitle = "QuiHacker"
-imageWidth = 240
-imageHeight = 240
+imageUrl = "/images/landing.png"
+imageTitle = "Quihacker & Sancho (toolkit)"
+imageWidth = 1000
+imageHeight = 700
 
 [[profileMode.buttons]]
 name = "👤 Whoami"
