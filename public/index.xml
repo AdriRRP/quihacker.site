@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Quihacker&#39;s Lab</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Quihacker&#39;s Lab</description>
+    <generator>Hugo -- 0.150.0</generator>
+    <language>es</language>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Whoami</title>
+      <link>http://localhost:1313/whoami/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/whoami/</guid>
+      <description>&lt;div class=&#34;whoami-hero&#34;&gt;
+  &lt;img src=&#34;http://localhost:1313/images/logo.png&#34; alt=&#34;Adrián “Quihacker” Ramos — Quihacker&#34;
+       style=&#34;width:140px;height:140px;&#34;&gt;
+  &lt;div class=&#34;text&#34;&gt;
+    &lt;p&gt;Soy &lt;strong&gt;Adrián “Quihacker” Ramos&lt;/strong&gt; —manchego de pura cepa y bigote reglamentario—. Abrí camino en artes de la web —CMS, GUIs y back-ends—; afiné oficio en automoción y en una startup full-stack de la fragua al estandarte. Después cambié rocín por clúster: &lt;strong&gt;Big Data&lt;/strong&gt; con &lt;strong&gt;Spark/Kafka&lt;/strong&gt;, primero en consultoría y luego en banca, afinando motores de riesgo hasta que los números corrieron. Más tarde crucé a producto: conectores, almacenamiento y mercados de datos; domé grafos y metadatos. Y, por el camino, aprendí a poner la &lt;strong&gt;IA&lt;/strong&gt; al servicio del oficio: &lt;strong&gt;LLMs&lt;/strong&gt; como &lt;strong&gt;destilador de conocimiento&lt;/strong&gt; y &lt;strong&gt;acelerador de proyectos&lt;/strong&gt;; &lt;strong&gt;ML&lt;/strong&gt; cuando toca medir o automatizar con datos.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

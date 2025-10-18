@@ -1,8 +1,27 @@
-{{- /* whoami-experience: fusiona periodos solapados/contiguos por empresa y ordena como LinkedIn */ -}}
-{{- $lang := .Page.Lang -}}
-{{- $dir  := index site.Data $lang "whoami" "experience" | default dict -}}
+{{- /* whoami-experience
+     ---------------------------------------------------------------
+     - Lee /data/<lang>/whoami/experience/*.toml
+     - Fusiona periodos solapados/adyacentes por empresa
+     - Ordena actuales primero; resto por fin descendente
+     - Renderiza grupos por empresa; cada rol es colapsable (<details>)
+     - Muestra duración total por empresa y por rol (ES/EN)
+     --------------------------------------------------------------- -}}
 
-{{- /* 1) Cargar y normalizar ítems */ -}}
+{{- /* (0) Data segura */ -}}
+{{- $lang := .Page.Lang | default "es" -}}
+{{- $data := index site.Data $lang | default dict -}}
+{{- $whoami := index $data "whoami" | default dict -}}
+{{- $dir := index $whoami "experience" | default dict -}}
+
+{{- /* (0b) Cadenas ES/EN */ -}}
+{{- $isEN := eq $lang "en" -}}
+{{- $yearSing := cond $isEN "year" "año" -}}
+{{- $yearPlur := cond $isEN "years" "años" -}}
+{{- $monthSing := cond $isEN "month" "mes" -}}
+{{- $monthPlur := cond $isEN "months" "meses" -}}
+{{- $andWord := cond $isEN "and" "y" -}}
+
+{{- /* (1) Normalizar y marcar actuales */ -}}
 {{- $items := slice -}}
 {{- range $k, $v := $dir }}
   {{- $end := $v.end | default "" -}}
@@ -10,7 +29,7 @@
   {{- $items = $items | append (merge $v (dict "_isCurrent" $isCurrent)) -}}
 {{- end -}}
 
-{{- /* 2) Mapear por empresa */ -}}
+{{- /* (2) Agrupar por empresa */ -}}
 {{- $byCompany := dict -}}
 {{- range $items -}}
   {{- $cid := or .company_id (.company | urlize) -}}
@@ -19,12 +38,11 @@
   {{- $byCompany = merge $byCompany (dict $cid $arr) -}}
 {{- end -}}
 
-{{- /* 3) Para cada empresa, ordenar roles por start y crear segmentos fusionando solapes/contiguos */ -}}
+{{- /* (3) Fusionar solapes/adyacentes por empresa */ -}}
 {{- $segments := slice -}}
 {{- range $cid, $rolesAll := $byCompany -}}
   {{- $roles := sort $rolesAll "start" "asc" -}}
 
-  {{- /* Variables del segmento en curso */ -}}
   {{- $segRoles := slice -}}
   {{- $segStart := "" -}}
   {{- $segEndDisplay := "" -}}
@@ -39,14 +57,12 @@
     {{- $rIsCurrent := or (eq $rEndLower "presente") (eq $rEndLower "present") -}}
 
     {{- if eq (len $segRoles) 0 -}}
-      {{- /* iniciar segmento */ -}}
       {{- $segRoles = slice . -}}
       {{- $segStart = $rStart -}}
       {{- $segEndDisplay = $rEndDisplay -}}
       {{- $segEndComp = $rEndComp -}}
       {{- $segIsCurrent = $rIsCurrent -}}
     {{- else -}}
-      {{- /* calcular índices Y*12+M para fin de segmento y comienzo del rol */ -}}
       {{- $segParts := split $segEndComp "-" -}}
       {{- $segY := int (index $segParts 0) -}}
       {{- $segM := int (replaceRE "^0+" "" (index $segParts 1)) -}}
@@ -61,7 +77,6 @@
       {{- $overlapOrSame := le $rIdx $segIdx -}}
 
       {{- if or $overlapOrSame $isAdjacent -}}
-        {{- /* fusionar */ -}}
         {{- $segRoles = $segRoles | append . -}}
         {{- if lt $segEndComp $rEndComp -}}
           {{- $segEndComp = $rEndComp -}}
@@ -69,7 +84,6 @@
         {{- end -}}
         {{- if $rIsCurrent -}}{{- $segIsCurrent = true -}}{{- end -}}
       {{- else -}}
-        {{- /* cerrar segmento actual y empezar uno nuevo */ -}}
         {{- $segments = $segments | append (dict
             "company"    (index $segRoles 0).company
             "company_id" (or (index $segRoles 0).company_id ((index $segRoles 0).company | urlize))
@@ -88,7 +102,6 @@
     {{- end -}}
   {{- end -}}
 
-  {{- /* empujar último segmento de la empresa si existe */ -}}
   {{- if gt (len $segRoles) 0 -}}
     {{- $segments = $segments | append (dict
         "company"    (index $segRoles 0).company
@@ -102,7 +115,7 @@
   {{- end -}}
 {{- end -}}
 
-{{- /* 4) Enriquecer con duración (meses) para “actuales” */ -}}
+{{- /* (4) Año/Mes actual + duración para ordenar */ -}}
 {{- $ny := int (dateFormat "2006" now) -}}
 {{- $nm := int (dateFormat "1"   now) -}} {{/* mes sin cero inicial */}}
 {{- $enriched := slice -}}
@@ -119,7 +132,7 @@
   {{- $enriched = $enriched | append (merge . (dict "_durMonths" $durMonths)) -}}
 {{- end -}}
 
-{{- /* 5) Orden global: actuales primero (duración desc, luego inicio asc); resto por fin desc */ -}}
+{{- /* (5) Orden global */ -}}
 {{- $currents := where $enriched "_isCurrent" true -}}
 {{- $noncurr  := where $enriched "_isCurrent" false -}}
 {{- $currents = sort (sort $currents "_durMonths" "desc") "_startMin" "asc" -}}
@@ -127,9 +140,9 @@
 {{- $ordered := $currents -}}
 {{- range $noncurr }}{{- $ordered = $ordered | append . -}}{{- end -}}
 
-{{- /* Diccionario de compañías (opcional) */ -}}
-{{- $companies := index site.Data $lang "whoami" "companies" | default dict -}}
-{{- $title := i18n "whoami_experience" | default "Experience" -}}
+{{- /* (6) Diccionario de compañías e i18n del título */ -}}
+{{- $companies := index $whoami "companies" | default dict -}}
+{{- $title := i18n "whoami_experience" | default (cond $isEN "Experience" "Experiencia") -}}
 
 <section class="whoami-exp">
   <h2 class="whoami-exp__title">{{ $title }}</h2>
@@ -138,47 +151,75 @@
       {{- $cid := .company_id -}}
       {{- $meta := index $companies $cid | default dict -}}
       {{- $name := or $meta.name .company -}}
-      {{- $url  := or $meta.url  "" -}}
 
-      {{- /* Logo de empresa con fallback */ -}}
+      {{- /* Logo */ -}}
       {{- $companyFile := printf "images/corp/%s.png" (lower $cid) -}}
       {{- $companyFs   := printf "static/%s" $companyFile -}}
       {{- $logo := cond (fileExists $companyFs) $companyFile "images/logo.png" -}}
 
-      {{- /* Cabecera del bloque: rango total ascendente */ -}}
+      {{- /* Periodo total de la empresa */ -}}
       {{- $rolesAsc := sort .roles "start" "asc" -}}
       {{- $periodStart := index (index $rolesAsc 0) "start" -}}
       {{- $periodEnd   := (index (index (last 1 $rolesAsc) 0) "end") | default "" -}}
 
-      {{/* Seleccionar la última URL definida: primero meta.url y luego se sobreescribe si algún rol la trae */}}
-      {{- $url := or $meta.url "" -}}
+      {{- /* URL final de empresa */ -}}
+      {{- $companyURL := or $meta.url "" -}}
       {{- range $rolesAsc -}}
-        {{- with .url -}}
-          {{- $url = . -}}
+        {{- with .url -}}{{- $companyURL = . -}}{{- end -}}
+      {{- end -}}
+
+      {{- /* Duración empresa (seguro; sin cond para parse) */ -}}
+      {{- $psParts := split $periodStart "-" -}}
+      {{- $psy := int (index $psParts 0) -}}
+      {{- $psm := int (replaceRE "^0+" "" (index $psParts 1)) -}}
+      {{- $peLower := lower (print $periodEnd) -}}
+      {{- $pey := 0 -}}{{- $pem := 0 -}}
+      {{- if or (eq $peLower "presente") (eq $peLower "present") (eq (trim $periodEnd " \t\r\n") "") -}}
+        {{- $pey = $ny -}}
+        {{- $pem = $nm -}}
+      {{- else -}}
+        {{- $peParts := split $periodEnd "-" -}}
+        {{- $pey = int (index $peParts 0) -}}
+        {{- $pem = int (replaceRE "^0+" "" (index $peParts 1)) -}}
+      {{- end -}}
+      {{- $pBeg := add (mul $psy 12) $psm -}}
+      {{- $pEnd := add (mul $pey 12) $pem -}}
+      {{- $pMonths := add (sub $pEnd $pBeg) 1 -}}
+      {{- $pYears := div $pMonths 12 -}}
+      {{- $pRem := mod $pMonths 12 -}}
+      {{- $pDur := "" -}}
+      {{- if ge $pMonths 12 -}}
+        {{- $pDur = printf "%d %s" $pYears (cond (eq $pYears 1) $yearSing $yearPlur) -}}
+        {{- if gt $pRem 0 -}}
+          {{- $pDur = printf "%s %s %d %s" $pDur $andWord $pRem (cond (eq $pRem 1) $monthSing $monthPlur) -}}
         {{- end -}}
+      {{- else -}}
+        {{- $pDur = printf "%d %s" $pMonths (cond (eq $pMonths 1) $monthSing $monthPlur) -}}
       {{- end -}}
 
       <article class="whoami-company">
-
         <header class="whoami-company__header">
           <div class="whoami-company__logo">
-            {{- if $url -}}<a href="{{ $url }}" target="_blank" rel="noopener">{{- end -}}
+            {{- if $companyURL -}}<a href="{{ $companyURL }}" target="_blank" rel="noopener">{{- end -}}
               <img src="{{ $logo | relURL }}" alt="{{ $name }} logo" loading="lazy" />
-            {{- if $url -}}</a>{{- end -}}
+            {{- if $companyURL -}}</a>{{- end -}}
           </div>
           <div class="whoami-company__meta">
             <div class="whoami-company__name">
-              {{- if $url -}}
-                <a href="{{ $url }}" target="_blank" rel="noopener">{{ $name }}</a>
+              {{- if $companyURL -}}
+                <a href="{{ $companyURL }}" target="_blank" rel="noopener">{{ $name }}</a>
               {{- else -}}
                 {{ $name }}
               {{- end -}}
             </div>
-            <div class="whoami-company__period">{{ $periodStart }} — {{ $periodEnd }}</div>
+            <div class="whoami-company__period">
+              {{ $periodStart }} — {{ $periodEnd }}
+              <span class="whoami-duration">({{ $pDur }})</span>
+            </div>
           </div>
         </header>
 
-        {{/* ---- ORDENAR ROLES DENTRO DEL BLOQUE: lo último primero ---- */}}
+        {{- /* (7) Orden interno de roles */ -}}
         {{- $rolesDisp := slice -}}
         {{- range $rolesAsc }}
           {{- $endLower := lower (print .end) -}}
@@ -191,24 +232,61 @@
 
         <div class="whoami-timeline">
           {{- range $rolesDisp -}}
-            {{- /* Icono de rol con fallback */ -}}
             {{- $ri := or .role_icon "images/logo.png" -}}
             {{- $riFs := printf "static/%s" (trim $ri "/") -}}
             {{- $roleIcon := cond (fileExists $riFs) $ri "images/logo.png" -}}
+
+            {{- $endLower := lower (print .end) -}}
+            {{- $isCurrentRole := or (eq $endLower "presente") (eq $endLower "present") -}}
+
+            {{- /* Duración por rol (seguro; sin cond para parse) */ -}}
+            {{- $rsParts := split .start "-" -}}
+            {{- $rsy := int (index $rsParts 0) -}}
+            {{- $rsm := int (replaceRE "^0+" "" (index $rsParts 1)) -}}
+            {{- $rey := 0 -}}{{- $rem := 0 -}}
+            {{- if or (eq $endLower "presente") (eq $endLower "present") (eq (trim (.end | default "") " \t\r\n") "") -}}
+              {{- $rey = $ny -}}
+              {{- $rem = $nm -}}
+            {{- else -}}
+              {{- $reParts := split (.end | default "0000-00") "-" -}}
+              {{- $rey = int (index $reParts 0) -}}
+              {{- $rem = int (replaceRE "^0+" "" (index $reParts 1)) -}}
+            {{- end -}}
+            {{- $rBeg := add (mul $rsy 12) $rsm -}}
+            {{- $rEnd := add (mul $rey 12) $rem -}}
+            {{- $rMonths := add (sub $rEnd $rBeg) 1 -}}
+            {{- $rYears := div $rMonths 12 -}}
+            {{- $rRema := mod $rMonths 12 -}}
+            {{- $rDur := "" -}}
+            {{- if ge $rMonths 12 -}}
+              {{- $rDur = printf "%d %s" $rYears (cond (eq $rYears 1) $yearSing $yearPlur) -}}
+              {{- if gt $rRema 0 -}}
+                {{- $rDur = printf "%s %s %d %s" $rDur $andWord $rRema (cond (eq $rRema 1) $monthSing $monthPlur) -}}
+              {{- end -}}
+            {{- else -}}
+              {{- $rDur = printf "%d %s" $rMonths (cond (eq $rMonths 1) $monthSing $monthPlur) -}}
+            {{- end -}}
 
             <div class="whoami-role">
               <div class="whoami-role__dot">
                 <img src="{{ $roleIcon | relURL }}" alt="role icon" />
               </div>
-              <div class="whoami-role__body">
-                <div class="whoami-role__title">{{ .title }}</div>
-                <div class="whoami-role__dates">{{ .start }} — {{ .end }}</div>
+
+              <details class="whoami-role__body">
+                <summary class="whoami-role__summary">
+                  <span class="whoami-role__title">{{ .title }}</span>
+                  <span class="whoami-role__dates">
+                    {{ .start }} — {{ .end }}
+                    <span class="whoami-duration">({{ $rDur }})</span>
+                  </span>
+                </summary>
+
                 {{- with .highlights -}}
                   <ul class="whoami-role__highlights">
                     {{- range . -}}<li>{{ . }}</li>{{- end -}}
                   </ul>
                 {{- end -}}
-              </div>
+              </details>
             </div>
           {{- end -}}
         </div>

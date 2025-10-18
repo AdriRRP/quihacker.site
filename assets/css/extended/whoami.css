@@ -1,33 +1,35 @@
+/* ===== Sección de experiencia ===== */
 .whoami-exp { 
-  margin-top: 2rem; 
+  margin-top: 2rem;                         /* separa la sección del bloque anterior */
 }
 
 .whoami-exp__title { 
   font-size: 1.75rem; 
   font-weight: 700; 
-  margin-bottom: 1rem; 
+  margin-bottom: 1rem;                      /* aire bajo el título */
 }
 
 .whoami-exp__groups { 
   display: grid; 
-  gap: 1.5rem; 
+  gap: 1rem;                                /* separación compacta entre empresas */
 }
 
+/* ===== Tarjeta de empresa ===== */
 .whoami-company { 
-  border: 1px solid var(--border); 
+  border: 1px solid var(--border);          /* usa el color del tema */
   border-radius: 12px; 
-  padding: 1.25rem; 
-  background: var(--theme); 
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06); 
+  padding: 1rem;                            /* interior más compacto */
+  background: var(--theme);                 /* fondo coherente con PaperMod */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);  /* sombra suave */
 }
 
 .whoami-company__header { 
   display: flex; 
   gap: 1rem; 
   align-items: center; 
-  border-bottom: 1px solid var(--border); 
-  padding-bottom: .75rem; 
-  margin-bottom: .75rem; 
+  border-bottom: 1px solid var(--border);   /* separador con el contenido */
+  padding-bottom: .5rem; 
+  margin-bottom: .5rem; 
 }
 
 .whoami-company__logo img { 
@@ -35,7 +37,7 @@
   height: 50px; 
   object-fit: contain; 
   border-radius: 8px; 
-  background: #fff; 
+  background: #fff;                         /* halo blanco para logos en dark */
   padding: 4px; 
   box-shadow: 0 2px 6px rgba(0,0,0,.1); 
 }
@@ -49,13 +51,14 @@
   font-size: .9rem; 
   opacity: .75; 
   margin-top: .2rem; 
+  white-space: nowrap;                      /* evita saltos raros en el rango */
 }
 
-/* Timeline */
+/* ===== Timeline vertical ===== */
 .whoami-timeline { 
   position: relative; 
-  margin-top: .75rem; 
-  padding-left: 2.75rem; 
+  margin-top: .5rem; 
+  padding-left: 2.5rem;                     /* hueco para el “dot” del rol */
 }
 
 .whoami-timeline::before { 
@@ -67,32 +70,34 @@
   width: 3px; 
   background: linear-gradient(var(--secondary), transparent); 
   border-radius: 2px; 
-  opacity: 0.3; 
+  opacity: 0.3;                             /* línea guía discreta */
 }
 
-/* Role items */
+/* ===== Ítems de rol ===== */
 .whoami-role { 
   position: relative; 
-  margin: 1rem 0; 
+  margin: .65rem 0;                         /* menos espacio entre roles */
+  min-height: 48px;                         /* evita solapes con el dot */
 }
 
+/* Punto/halo del rol (icono dentro) */
 .whoami-role__dot { 
   position: absolute; 
   left: -0.15rem; 
-  top: -0.1rem;                        /* sutil ajuste vertical */
-  width: 44px;                         /* antes 32px */
+  top: 0;                                   /* alinear con el inicio del rol */
+  width: 44px; 
   height: 44px; 
   border-radius: 50%; 
   background: radial-gradient(
     rgba(255,255,255,0.95) 0%,
     rgba(255,255,255,0.80) 35%,
     rgba(255,255,255,0.00) 70%
-  );
-  border: none;                        /* sin marco */
+  );                                        /* “sol” suave por defecto */
+  border: none;                          
   display: flex; 
   align-items: center; 
   justify-content: center; 
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15); 
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);  /* profundidad */
 }
 
 .whoami-role__dot img { 
@@ -101,27 +106,181 @@
   object-fit: contain; 
 }
 
+/* Contenedor del cuerpo colapsable (details) */
 .whoami-role__body { 
-  margin-left: 3rem; 
+  margin-left: 3rem;                        /* alinea con la línea del timeline */
 }
 
+/* ===== Cabecera del colapsable (summary) ===== */
+/* caret | título | fechas (fechas a la izquierda) */
+.whoami-role__summary{
+  list-style: none; 
+  cursor: pointer; 
+  display: grid;
+  grid-template-columns: auto 1fr auto;     /* caret | título | fechas */
+  column-gap: .35rem;                       /* margen mínimo caret-título */
+  align-items: center;                      /* centrado vertical para 1 línea */
+  padding: 0; 
+  margin: 0;
+  min-height: 44px;                         /* altura mínima igual al dot */
+}
+
+.whoami-role__summary::-webkit-details-marker { 
+  display: none;                            /* quita triangulito nativo */
+}
+
+/* Caret ▸ */
+.whoami-role__summary::before {
+  content: "▸"; 
+  display: inline-block; 
+  width: 1ch; 
+  transform: translateY(1px); 
+  transition: transform .15s ease-in-out; 
+  opacity: .85;
+  grid-column: 1;                           /* va en la primera columna */
+}
+
+.whoami-role__body[open] > .whoami-role__summary::before { 
+  transform: rotate(90deg) translateY(0);   /* gira al abrir */
+}
+
+/* Título y fechas del rol */
 .whoami-role__title { 
   font-weight: 600; 
   font-size: 1rem; 
+  grid-column: 2;                           /* segunda columna */
 }
 
 .whoami-role__dates { 
   font-size: .85rem; 
   opacity: .75; 
   margin-top: .15rem; 
+  white-space: nowrap;                      /* evita cortes de línea */
+  text-align: left;                         /* a la izquierda */
+  font-variant-numeric: tabular-nums;       /* dígitos monoespaciados */
+  grid-column: 3;                           /* tercera columna */
 }
 
+/* Lista de highlights al desplegar */
 .whoami-role__highlights { 
-  margin: .4rem 0 0 0; 
+  margin: .4rem 0 0 1.25rem; 
   padding-left: 1.25rem; 
 }
 
 .whoami-role__highlights li { 
   margin: .25rem 0; 
   line-height: 1.35; 
+}
+
+.whoami-duration{ opacity:.65; margin-left:.35rem; white-space:nowrap; font-size:.85em; }
+
+/* ===== Avatar a la izquierda (capitular) ===== */
+.whoami-hero {
+  margin: 0 0 1.25rem;
+}
+.whoami-hero::after {
+  content: "";
+  display: table;
+  clear: both;                              /* el contenedor recoge la altura del float */
+}
+.whoami-hero img {
+  float: left;
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin: 0 1rem .6rem 0;                   /* separación a la derecha y abajo */
+}
+.whoami-hero .text > :first-child {
+  margin-top: 0;                            /* evita hueco extra arriba */
+}
+.whoami-hero .text > :not(:first-child) {
+  clear: both;                              /* los siguientes párrafos bajan debajo */
+}
+
+/* ===== Tema: ajustes light/dark ===== */
+@media (prefers-color-scheme: dark){
+  .whoami-company{
+    border-color: rgba(255,255,255,.12);
+    background: rgba(255,255,255,.03);
+    box-shadow: 0 10px 24px rgba(0,0,0,.35);
+  }
+  .whoami-timeline::before{
+    background: linear-gradient(var(--secondary), transparent);
+    opacity: .35;
+  }
+  .whoami-role__dot{
+    background: radial-gradient(rgba(255,255,255,.95) 0%,
+                                 rgba(255,255,255,.80) 35%,
+                                 rgba(255,255,255,0) 70%);
+    box-shadow: 0 6px 18px rgba(0,0,0,.25);
+  }
+}
+
+@media (prefers-color-scheme: light){
+  .whoami-company{
+    border-color: rgba(0,0,0,.10);
+    background: #fff;
+    box-shadow: 0 6px 16px rgba(0,0,0,.06);
+  }
+  .whoami-timeline::before{
+    background: linear-gradient(rgba(0,0,0,.28), transparent);
+    opacity: .22;
+  }
+  .whoami-company__logo img{
+    box-shadow: 0 1px 3px rgba(0,0,0,.08);
+  }
+  .whoami-role__dot{
+    background: radial-gradient(rgba(0,0,0,.10) 0%,
+                                 rgba(0,0,0,.06) 35%,
+                                 rgba(0,0,0,0) 70%);
+    box-shadow: 0 4px 12px rgba(0,0,0,.10);
+  }
+}
+
+/* ===== Responsivo ===== */
+@media (max-width: 520px){
+  .whoami-role{ min-height: 44px; }
+  .whoami-role__summary{
+    grid-template-columns: auto 1fr;        /* caret | bloque de texto */
+    row-gap: .15rem;
+    min-height: 40px;
+  }
+  .whoami-role__dates{
+    grid-column: 2;                         /* fechas debajo del título */
+    text-align: left;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 640px) {
+  .whoami-hero img {
+    float: none;
+    width: 120px;
+    height: 120px;
+    margin: 0 0 .75rem 0;
+  }
+  .whoami-hero .text > :not(:first-child) {
+    clear: none;
+  }
+}
+
+/* Móvil: si no hay interlineado, centra el hero */
+@media (max-width: 640px) {
+  .whoami-hero img {
+    float: none;                 /* sin float */
+    display: block;              /* permite centrar con márgenes */
+    width: 120px;
+    height: 120px;
+    margin: 0 auto .75rem auto;  /* centrado horizontal */
+  }
+  /* El texto ya no “salta” por el float: queda debajo del logo */
+  .whoami-hero .text > :not(:first-child) {
+    clear: none;
+  }
+}
+
+/* ===== Accesibilidad ===== */
+@media (prefers-reduced-motion: reduce) {
+  .whoami-role__summary::before { transition: none; }
 }

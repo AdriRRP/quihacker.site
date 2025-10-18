@@ -1,0 +1,7 @@
+<div class="whoami-hero">
+  <img src="{{ .Get "src" }}" alt="{{ .Get "alt" }}"
+       {{ with .Get "width" }}style="width:{{ . }}px;height:{{ . }}px;"{{ end }}>
+  <div class="text">
+    {{ .Inner | markdownify }}
+  </div>
+</div>
