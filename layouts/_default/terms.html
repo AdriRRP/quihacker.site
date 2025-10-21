@@ -1,0 +1,33 @@
+{{- define "main" }}
+
+{{- if .Title }}
+<header class="page-header">
+  <h1>{{ .Title }}</h1>
+  {{- if .Description }}
+  <div class="post-description">
+    {{ .Description }}
+  </div>
+  {{- end }}
+</header>
+{{- end }}
+
+<ul class="terms-tags">
+  {{- $type := .Type }}
+  {{- range $key, $value := .Data.Terms.Alphabetical }}
+    {{- $name := .Name }}   {{/* nombre del término tal cual lo guarda Hugo */}}
+    {{- $count := .Count }}
+    {{- $p := site.GetPage (printf "/%s/%s" $type ($name | urlize)) }}
+
+    {{- /* etiqueta visible: LinkTitle > Title > humanize(name) */ -}}
+    {{- $label := (cond (and $p (ne $p.LinkTitle "")) $p.LinkTitle
+                  (cond (and $p (ne $p.Title "")) $p.Title (humanize $name))) -}}
+
+    <li>
+      <a href="{{ if $p }}{{ $p.Permalink }}{{ else }}{{ printf "/%s/%s/" $type ($name | urlize) | relURL }}{{ end }}">
+        {{- $label -}} <sup><strong><sup>{{ $count }}</sup></strong></sup>
+      </a>
+    </li>
+  {{- end }}
+</ul>
+
+{{- end }}{{/* end main */ -}}

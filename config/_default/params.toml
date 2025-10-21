@@ -1,6 +1,11 @@
 label.icon = "/images/logo.png"
 label.iconHeight = 45
 
+ShowBreadCrumbs = true
+ShowPostNavLinks = true
+ShowCodeCopyButtons = true
+ShowRssButtonInSectionTermList = true
+
 [assets]
 favicon          = "/favicon.ico"
 favicon16x16     = "/favicon-16x16.png"
@@ -15,12 +20,18 @@ imageTitle = "Quihacker & Sancho (toolkit)"
 imageWidth = 300
 imageHeight = 300
 
-[[profileMode.buttons]]
-name = "👤 Whoami"
-url = "/whoami"
+[params.fuseOpts]
+isCaseSensitive = false
+shouldSort      = true
+distance        = 1000
+threshold       = 0.3
+minMatchCharLength = 2
+keys = ["title", "permalink", "summary", "content"]
+
 [[socialIcons]]
 name = "LinkedIn"
 url = "https://www.linkedin.com/in/adrian-ramos-rp"
+
 [[socialIcons]]
 name = "GitHub"
 url = "https://github.com/AdriRRP"

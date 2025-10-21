@@ -1,2 +1,15 @@
+# Traducción de la sección "posts"
+- id: Posts
+  translation: "Artículos"
+
+# Traducción de la taxonomía "tags"
+- id: Tags
+  translation: "Etiquetas"
+
+# Traducción de la taxonomía "series"
+- id: Series
+  translation: "Series"
+
+# Tu entrada existente (ejemplo):
 - id: whoami_experience
-  translation: "Experiencia"
+  translation: "Experiencia" 

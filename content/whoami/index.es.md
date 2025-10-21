@@ -2,10 +2,10 @@
 title = "Whoami"
 slug = "whoami"
 showToc = false
-hideMeta = true
-images = ["/images/logo.png"]
-aliases = ["/about", "/sobre-mi"]
+searchHidden = true
+rssHidden = true
 draft = false
+disableKinds = ['rss']
 +++
 
 {{< side-hero src="/images/logo.png" alt="Adrián “Quihacker” Ramos — Quihacker" width="140" >}}

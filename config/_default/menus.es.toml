@@ -1,0 +1,24 @@
+[[main]]
+name = "📝 Artículos"
+pageRef = "posts"
+weight = 10
+
+[[main]]
+name = "🔎 Buscar"
+pageRef = "search"
+weight = 15
+
+[[main]]
+name = "🧵 Series"
+pageRef = "series"
+weight = 20
+
+[[main]]
+name = "🏷️ Etiquetas"
+pageRef = "tags"
+weight = 30
+
+[[main]]
+name = "👤 Whoami"
+pageRef = "whoami"
+weight = 40

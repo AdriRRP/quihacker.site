@@ -1,3 +1,23 @@
 [profileMode]
 title = "El Laboratorio de Quihacker"
 subtitle = "Compilando entropía, explotando el caos."
+
+[[profileMode.buttons]]
+name = "📝 Artículos"
+url = "posts"
+
+[[profileMode.buttons]]
+name = "🔎 Buscar"
+url = "search"
+
+[[profileMode.buttons]]
+name = "🧵 Series"
+url = "series"
+
+[[profileMode.buttons]]
+name = "🏷️ Etiquetas"
+url = "tags"
+
+[[profileMode.buttons]]
+name = "👤 Whoami"
+url = "whoami"
