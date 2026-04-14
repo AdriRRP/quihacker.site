@@ -1,0 +1,343 @@
+:root {
+  --qh-copper: #b36b3f;
+  --qh-copper-soft: rgba(179, 107, 63, 0.16);
+  --qh-cyan: #58c7d8;
+  --qh-cyan-soft: rgba(88, 199, 216, 0.14);
+  --qh-ink-soft: rgba(44, 36, 29, 0.08);
+}
+
+.dark {
+  --qh-copper: #cf8558;
+  --qh-copper-soft: rgba(207, 133, 88, 0.18);
+  --qh-cyan: #78d6e4;
+  --qh-cyan-soft: rgba(120, 214, 228, 0.16);
+  --qh-ink-soft: rgba(255, 255, 255, 0.06);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 12%, var(--qh-copper-soft), transparent 20%),
+    radial-gradient(circle at 82% 10%, var(--qh-cyan-soft), transparent 18%),
+    linear-gradient(var(--qh-ink-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--qh-ink-soft) 1px, transparent 1px);
+  background-size: auto, auto, 28px 28px, 28px 28px;
+  background-position: center, center, -1px -1px, -1px -1px;
+  opacity: 0.42;
+  z-index: -1;
+}
+
+.header::before,
+.footer::before {
+  content: "";
+  position: absolute;
+  left: var(--gap);
+  right: var(--gap);
+  top: 0;
+  height: 100%;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, transparent 0 2%, var(--qh-copper-soft) 2% 2.2%, transparent 2.2% 97.8%, var(--qh-cyan-soft) 97.8% 98%, transparent 98% 100%);
+  opacity: 0.85;
+}
+
+.header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--qh-copper-soft), var(--qh-cyan-soft), transparent);
+}
+
+.header,
+.footer,
+.post-entry,
+.archive-entry,
+.terms-tags a,
+.post-tags a,
+.paginav,
+.whoami-company,
+.profile .social-icons a {
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease, background-color 0.18s ease;
+}
+
+.header,
+.footer {
+  position: relative;
+}
+
+.logo a {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.dark .logo a {
+  text-shadow: 0 0 16px rgba(120, 214, 228, 0.12);
+}
+
+#menu a span {
+  position: relative;
+}
+
+#menu a:hover span,
+#menu .active {
+  color: var(--qh-copper);
+  border-bottom: 0;
+}
+
+#menu a:hover span::after,
+#menu .active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.28rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, currentColor, transparent);
+}
+
+.profile img {
+  filter: saturate(1.03);
+}
+
+.profile img:hover {
+  box-shadow:
+    0 0 0 10px rgba(255, 248, 238, 0.52),
+    0 0 0 22px rgba(194, 155, 111, 0.16),
+    0 0 60px rgba(88, 199, 216, 0.15),
+    0 0 72px rgba(179, 107, 63, 0.14),
+    var(--qh-home-image-shadow);
+}
+
+.profile h1 {
+  text-wrap: balance;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.dark .profile h1 {
+  text-shadow: 0 0 18px rgba(120, 214, 228, 0.08);
+}
+
+.profile .profile_inner > span {
+  position: relative;
+  padding-bottom: 0.9rem;
+}
+
+.profile .profile_inner > span::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 7.5rem;
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, var(--qh-copper), var(--qh-cyan), transparent);
+  opacity: 0.8;
+}
+
+.profile .social-icons a:hover,
+.terms-tags a:hover,
+.post-tags a:hover,
+.paginav a:hover,
+.post-entry:hover,
+.archive-entry:hover,
+.whoami-company:hover {
+  border-color: color-mix(in srgb, var(--qh-copper) 42%, var(--border));
+  box-shadow:
+    0 10px 28px rgba(44, 32, 24, 0.08),
+    0 0 0 1px var(--qh-cyan-soft);
+}
+
+.dark .profile .social-icons a:hover,
+.dark .terms-tags a:hover,
+.dark .post-tags a:hover,
+.dark .paginav a:hover,
+.dark .post-entry:hover,
+.dark .archive-entry:hover,
+.dark .whoami-company:hover {
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.24),
+    0 0 0 1px var(--qh-cyan-soft);
+}
+
+.post-entry,
+.archive-entry,
+.whoami-company {
+  position: relative;
+  overflow: hidden;
+}
+
+.post-entry .entry-header,
+.archive-entry-title,
+.whoami-company__name {
+  position: relative;
+}
+
+.post-entry .entry-header::after,
+.archive-entry-title::after,
+.whoami-company__name::after {
+  content: "";
+  display: block;
+  width: 2.8rem;
+  height: 1px;
+  margin-top: 0.45rem;
+  background: linear-gradient(90deg, var(--qh-copper), var(--qh-cyan), transparent);
+  opacity: 0.75;
+}
+
+.post-entry::before,
+.archive-entry::before,
+.whoami-company::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 5.5rem;
+  height: 1px;
+  background: linear-gradient(90deg, var(--qh-copper), transparent);
+  opacity: 0.7;
+}
+
+.post-entry::after,
+.archive-entry::after,
+.whoami-company::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 auto;
+  width: 4.5rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--qh-cyan));
+  opacity: 0.55;
+}
+
+.post-entry .entry-cover img {
+  filter: saturate(1.04) contrast(1.01);
+}
+
+.post-entry .entry-cover {
+  position: relative;
+}
+
+.post-entry .entry-cover::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 32%;
+  background: linear-gradient(180deg, transparent, rgba(30, 24, 20, 0.16));
+  pointer-events: none;
+}
+
+.post-entry .entry-header h2,
+.post-title,
+.whoami-exp__title {
+  letter-spacing: 0.01em;
+}
+
+.post-entry .entry-header h2 a:hover,
+.post-title:hover {
+  color: var(--qh-copper);
+}
+
+.paginav {
+  position: relative;
+}
+
+.paginav::before {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--qh-copper-soft), var(--qh-cyan-soft), transparent);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.paginav .title {
+  color: var(--secondary);
+}
+
+.paginav a {
+  position: relative;
+}
+
+.post-tags a,
+.terms-tags a {
+  border-radius: 999px;
+}
+
+.whoami-exp__title {
+  position: relative;
+  display: inline-block;
+  padding-right: 1rem;
+}
+
+.whoami-exp__title::after {
+  content: "";
+  position: absolute;
+  left: calc(100% + 0.35rem);
+  top: 50%;
+  width: 4rem;
+  height: 1px;
+  background: linear-gradient(90deg, var(--qh-copper), var(--qh-cyan), transparent);
+  transform: translateY(-50%);
+}
+
+.whoami-company__header {
+  position: relative;
+}
+
+.whoami-company__header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.5rem;
+  height: 1px;
+  background: linear-gradient(90deg, var(--qh-copper-soft), var(--qh-cyan-soft), transparent);
+}
+
+.whoami-role__summary::before {
+  color: var(--qh-copper);
+}
+
+.whoami-timeline::before {
+  background: linear-gradient(var(--qh-copper-soft), var(--qh-cyan-soft), transparent);
+}
+
+.whoami-role__dot {
+  box-shadow:
+    0 6px 18px rgba(0,0,0,0.15),
+    0 0 0 1px rgba(255,255,255,0.25),
+    0 0 18px var(--qh-cyan-soft);
+}
+
+.dark .whoami-role__dot {
+  box-shadow:
+    0 6px 18px rgba(0,0,0,0.25),
+    0 0 0 1px rgba(255,255,255,0.08),
+    0 0 18px var(--qh-cyan-soft);
+}
+
+.whoami-role__summary:hover .whoami-role__title,
+.post-entry:hover .entry-header h2 a,
+.archive-entry:hover .archive-entry-title,
+.paginav a:hover .title {
+  color: var(--qh-copper);
+}
+
+.whoami-role__summary:hover .whoami-role__dates,
+.post-entry:hover .entry-footer,
+.archive-entry:hover .archive-meta {
+  color: var(--qh-cyan);
+}
+
+@media (max-width: 768px) {
+  .whoami-exp__title::after {
+    width: 2rem;
+  }
+}
