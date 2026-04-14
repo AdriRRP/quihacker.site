@@ -61,11 +61,11 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": {{ if .Params.profilePage }}"ProfilePage"{{ else }}"BlogPosting"{{ end }},
+  "@type": {{ if .Params.profilePage }}"ProfilePage"{{ else if .Params.utilityPage }}"WebPage"{{ else }}"BlogPosting"{{ end }},
   "headline": {{ .Title | plainify}},
   "name": "{{ .Title | plainify }}",
   "description": {{ with .Description | plainify }}{{ . }}{{ else }}{{ .Summary | plainify  }}{{ end -}},
-  {{- if not .Params.profilePage }}
+  {{- if and (not .Params.profilePage) (not .Params.utilityPage) }}
   "keywords": [
     {{- if .Params.keywords }}
     {{ range $i, $e := .Params.keywords }}{{ if $i }}, {{ end }}{{ $e }}{{ end }}
@@ -107,7 +107,7 @@
       {{- end }}
     ]
   },
-  {{- else }}
+  {{- else if not .Params.utilityPage }}
   "datePublished": {{ .PublishDate }},
   "dateModified": {{ .Lastmod }},
   {{- with (.Params.author | default site.Params.author) }}
@@ -134,7 +134,7 @@
   },
   "publisher": {
     "@type": "{{- ( site.Params.schema.publisherType | default "Organization") | title -}}",
-    "name": {{ site.Title }},
+    "name": {{ site.Params.schema.publisherName | default site.Params.author | default site.Title }},
     "logo": {
       "@type": "ImageObject",
       "url": {{ site.Params.assets.favicon | default "favicon.ico" | absURL }}

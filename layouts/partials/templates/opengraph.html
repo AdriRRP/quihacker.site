@@ -16,7 +16,7 @@
   <meta property="og:locale" content="{{ . }}">
 {{- end }}
 
-{{- if and .IsPage (not .Params.profilePage) }}
+{{- if and .IsPage (not .Params.profilePage) (not .Params.utilityPage) }}
   <meta property="og:type" content="article">
   {{- with .Section }}
     <meta property="article:section" content="{{ . }}">
