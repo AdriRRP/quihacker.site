@@ -1,0 +1,105 @@
+#searchbox {
+  max-width: 48rem;
+}
+
+#searchbox input {
+  padding: 0.95rem 1.1rem;
+  width: 100%;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.4;
+  border: 1px solid rgba(124, 96, 66, 0.16);
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.45));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.55),
+    0 10px 24px rgba(76, 54, 35, 0.05);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease, background-color 0.18s ease;
+}
+
+#searchbox input::placeholder {
+  color: var(--secondary);
+  opacity: 0.9;
+}
+
+#searchbox input:hover {
+  border-color: rgba(124, 96, 66, 0.26);
+}
+
+#searchbox input:focus {
+  outline: 0;
+  border-color: color-mix(in srgb, var(--qh-copper, #b36b3f) 50%, var(--border));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.55),
+    0 0 0 1px rgba(88, 199, 216, 0.12),
+    0 14px 32px rgba(76, 54, 35, 0.08);
+  transform: translateY(-1px);
+}
+
+#searchResults {
+  margin: 0.95rem 0 0;
+  width: 100%;
+}
+
+#searchResults li {
+  list-style: none;
+  border-radius: 16px;
+  padding: 0.95rem 1rem;
+  margin: 0.75rem 0;
+  position: relative;
+  font-weight: 600;
+  border: 1px solid rgba(124, 96, 66, 0.14);
+  background: rgba(255, 252, 248, 0.82);
+  box-shadow: 0 8px 22px rgba(76, 54, 35, 0.04);
+}
+
+#searchResults li:active {
+  transition: transform 0.1s;
+  transform: scale(0.985);
+}
+
+#searchResults a {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  outline: none;
+  border-radius: 16px;
+}
+
+#searchResults .focus {
+  transform: scale(0.99);
+  border-color: color-mix(in srgb, var(--qh-copper, #b36b3f) 42%, var(--border));
+  box-shadow:
+    0 10px 24px rgba(76, 54, 35, 0.08),
+    0 0 0 1px rgba(88, 199, 216, 0.14);
+}
+
+.dark #searchbox input {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(180deg, rgba(79, 82, 89, 0.92), rgba(60, 63, 69, 0.9));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.04),
+    0 12px 28px rgba(0, 0, 0, 0.2);
+}
+
+.dark #searchbox input:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.dark #searchbox input:focus {
+  border-color: rgba(120, 214, 228, 0.3);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.04),
+    0 0 0 1px rgba(120, 214, 228, 0.16),
+    0 16px 32px rgba(0, 0, 0, 0.26);
+}
+
+.dark #searchResults li {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(68, 70, 76, 0.9);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
+}

@@ -118,6 +118,14 @@ body,
   box-shadow: 0 6px 20px rgba(76, 54, 35, 0.04);
 }
 
+body:not(.dark) .whoami-company {
+  background: #fff !important;
+  border-color: rgba(124, 96, 66, 0.14) !important;
+  box-shadow:
+    0 14px 34px rgba(73, 50, 33, 0.08),
+    0 1px 0 rgba(255,255,255,0.85) inset !important;
+}
+
 .dark .post-entry,
 .dark .archive-entry,
 .dark .terms-tags a,
@@ -126,6 +134,68 @@ body,
   background: rgba(68, 70, 76, 0.9);
   border-color: rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
+}
+
+.dark .whoami-company {
+  background: rgba(68, 70, 76, 0.9) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow:
+    0 16px 36px rgba(0, 0, 0, 0.22),
+    0 1px 0 rgba(255,255,255,0.04) inset !important;
+}
+
+.whoami-company {
+  border-radius: 16px;
+}
+
+.whoami-company__header {
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.whoami-company__logo img {
+  border-radius: 12px;
+  border: 1px solid rgba(124, 96, 66, 0.1);
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(248,241,232,0.92));
+  box-shadow:
+    0 6px 16px rgba(73, 50, 33, 0.08),
+    0 1px 0 rgba(255,255,255,0.8) inset;
+}
+
+.dark .whoami-company__logo img {
+  border-color: rgba(255,255,255,0.08);
+  background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(238,238,238,0.92));
+  box-shadow:
+    0 8px 18px rgba(0,0,0,0.22),
+    0 1px 0 rgba(255,255,255,0.16) inset;
+}
+
+.whoami-company__name {
+  letter-spacing: 0.01em;
+}
+
+.whoami-company__period {
+  color: var(--secondary);
+}
+
+.whoami-role__summary {
+  padding: 0.1rem 0;
+}
+
+.whoami-role__title {
+  line-height: 1.35;
+}
+
+.whoami-role__dates {
+  opacity: 0.82;
+}
+
+.whoami-role__highlights {
+  margin-top: 0.6rem;
+}
+
+.whoami-role__highlights li::marker {
+  color: var(--qh-copper, var(--primary));
 }
 
 @media screen and (max-width: 768px) {
