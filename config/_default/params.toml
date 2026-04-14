@@ -20,6 +20,7 @@ safari_pinned_tab = "/favicon-32x32.png"
 [schema]
 publisherType = "Person"
 publisherName = "Adrian Ramos"
+image = "/images/landing.png"
 sameAs = [
   "https://www.linkedin.com/in/adrian-ramos-rp",
   "https://github.com/AdriRRP",

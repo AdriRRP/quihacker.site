@@ -14,5 +14,5 @@ series = "series"
 [outputs]
 home    = ["HTML", "JSON"]   # JSON es imprescindible para la búsqueda
 section = ["HTML", "RSS"]
-taxonomy= ["HTML", "RSS"]
-term    = ["HTML", "RSS"]
+taxonomy= ["HTML"]
+term    = ["HTML"]

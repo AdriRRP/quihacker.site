@@ -6,6 +6,9 @@
 {{- if and (eq .Kind "term") (eq (len .Pages) 0) -}}
   {{- $robotsNoIndex = true -}}
 {{- end -}}
+{{- if and (eq .Kind "section") (eq (len .RegularPages) 0) -}}
+  {{- $robotsNoIndex = true -}}
+{{- end -}}
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
