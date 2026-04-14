@@ -3,24 +3,4 @@ keywords = ["Rust", "hardware hacking", "ESP32", "software architecture", "cyber
 
 [profileMode]
 title = "Quihacker's Lab"
-subtitle = "Compiling entropy, exploiting chaos."
-
-[[profileMode.buttons]]
-name = "📝 Posts"
-url = "posts"
-
-[[profileMode.buttons]]
-name = "🔎 Search"
-url = "search"
-
-[[profileMode.buttons]]
-name = "🧵 Series"
-url = "series"
-
-[[profileMode.buttons]]
-name = "🏷️ Tags"
-url = "tags"
-
-[[profileMode.buttons]]
-name = "👤 Whoami"
-url = "whoami"
+subtitle = "Technical notes on Rust, hardware hacking, offensive security, and pragmatic AI."
