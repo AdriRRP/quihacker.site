@@ -171,6 +171,15 @@ body::before {
   overflow: hidden;
 }
 
+.post-entry,
+.archive-entry,
+.paginav a,
+.whoami-company,
+.post-tags a,
+.terms-tags a {
+  isolation: isolate;
+}
+
 .post-entry .entry-header,
 .archive-entry-title,
 .whoami-company__name {
@@ -213,6 +222,29 @@ body::before {
   opacity: 0.55;
 }
 
+.post-entry .entry-link::before,
+.archive-entry::before,
+.paginav a::before,
+.paginav a::after,
+.post-tags a::before,
+.terms-tags a::before,
+.whoami-company__header::before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.65;
+}
+
+.post-entry .entry-link::before {
+  inset: 0;
+  background:
+    linear-gradient(90deg, var(--qh-copper-soft), transparent 28%) top left / 2.5rem 1px no-repeat,
+    linear-gradient(180deg, var(--qh-copper-soft), transparent 28%) top left / 1px 2.5rem no-repeat,
+    linear-gradient(270deg, var(--qh-cyan-soft), transparent 28%) bottom right / 2.5rem 1px no-repeat,
+    linear-gradient(0deg, var(--qh-cyan-soft), transparent 28%) bottom right / 1px 2.5rem no-repeat;
+  z-index: 0;
+}
+
 .post-entry .entry-cover img {
   filter: saturate(1.04) contrast(1.01);
 }
@@ -232,17 +264,20 @@ body::before {
 
 .post-entry .entry-header h2,
 .post-title,
-.whoami-exp__title {
+.whoami-exp__title,
+.page-header h1 {
   letter-spacing: 0.01em;
 }
 
 .post-entry .entry-header h2 a:hover,
-.post-title:hover {
+.post-title:hover,
+.page-header h1:hover {
   color: var(--qh-copper);
 }
 
 .paginav {
   position: relative;
+  overflow: hidden;
 }
 
 .paginav::before {
@@ -263,20 +298,81 @@ body::before {
 
 .paginav a {
   position: relative;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  backdrop-filter: blur(4px);
+}
+
+.paginav a::before {
+  inset: 0;
+  background:
+    linear-gradient(90deg, var(--qh-copper-soft), transparent 36%) top left / 2.25rem 1px no-repeat,
+    linear-gradient(180deg, var(--qh-copper-soft), transparent 36%) top left / 1px 2.25rem no-repeat;
+  z-index: 0;
+}
+
+.paginav a::after {
+  inset: auto 0 0 auto;
+  width: 2.25rem;
+  height: 2.25rem;
+  background:
+    linear-gradient(270deg, var(--qh-cyan-soft), transparent 36%) bottom right / 2.25rem 1px no-repeat,
+    linear-gradient(0deg, var(--qh-cyan-soft), transparent 36%) bottom right / 1px 2.25rem no-repeat;
+  z-index: 0;
+}
+
+.paginav a > * {
+  position: relative;
+  z-index: 1;
 }
 
 .post-tags a,
 .terms-tags a {
   border-radius: 999px;
+  position: relative;
+  overflow: hidden;
+  padding-inline: 1rem;
 }
 
-.whoami-exp__title {
+.post-tags a::before,
+.terms-tags a::before {
+  inset: 0;
+  background:
+    linear-gradient(90deg, var(--qh-copper-soft), transparent 30%) top left / 1.2rem 1px no-repeat,
+    linear-gradient(180deg, var(--qh-copper-soft), transparent 30%) top left / 1px 1.2rem no-repeat,
+    linear-gradient(270deg, var(--qh-cyan-soft), transparent 30%) bottom right / 1.2rem 1px no-repeat,
+    linear-gradient(0deg, var(--qh-cyan-soft), transparent 30%) bottom right / 1px 1.2rem no-repeat;
+  z-index: 0;
+}
+
+.post-tags a span,
+.terms-tags a span {
+  position: relative;
+  z-index: 1;
+}
+
+.whoami-exp__title,
+.page-header h1 {
   position: relative;
   display: inline-block;
   padding-right: 1rem;
+  padding-left: 1rem;
 }
 
-.whoami-exp__title::after {
+.whoami-exp__title::before,
+.page-header h1::before {
+  content: "◇";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  font-size: 0.6em;
+  color: var(--qh-copper);
+  transform: translateY(-50%);
+  opacity: 0.9;
+}
+
+.whoami-exp__title::after,
+.page-header h1::after {
   content: "";
   position: absolute;
   left: calc(100% + 0.35rem);
@@ -289,6 +385,15 @@ body::before {
 
 .whoami-company__header {
   position: relative;
+}
+
+.whoami-company__header::before {
+  inset: 0 auto auto 0;
+  width: 2.6rem;
+  height: 2.6rem;
+  background:
+    linear-gradient(90deg, var(--qh-copper-soft), transparent 38%) top left / 2.6rem 1px no-repeat,
+    linear-gradient(180deg, var(--qh-copper-soft), transparent 38%) top left / 1px 2.6rem no-repeat;
 }
 
 .whoami-company__header::after {
@@ -336,8 +441,28 @@ body::before {
   color: var(--qh-cyan);
 }
 
+.post-meta,
+.entry-footer,
+.whoami-company__period,
+.whoami-role__dates,
+.paginav .title {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.page-header h1,
+.post-title {
+  text-wrap: balance;
+}
+
 @media (max-width: 768px) {
-  .whoami-exp__title::after {
+  .whoami-exp__title::after,
+  .page-header h1::after {
     width: 2rem;
+  }
+
+  .whoami-exp__title,
+  .page-header h1 {
+    padding-left: 0.8rem;
   }
 }
