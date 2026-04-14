@@ -98,11 +98,31 @@
 <meta name="msapplication-TileColor" content="{{ site.Params.assets.msapplication_TileColor | default "#2e2e33" }}">
 
 {{ range .AlternativeOutputFormats -}}
+{{- $isEmptySectionRss := and (eq $.Kind "section") (eq .MediaType.Type "application/rss+xml") (eq (len $.RegularPages) 0) -}}
+{{- if not $isEmptySectionRss }}
 <link rel="{{ .Rel }}" type="{{ .MediaType.Type | html }}" href="{{ .Permalink | safeURL }}">
+{{- end }}
 {{ end -}}
 {{- range .AllTranslations -}}
 <link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}">
 {{ end -}}
+{{- $defaultSite := index (sort site.Sites "Language.Weight") 0 -}}
+{{- $xDefault := .Permalink -}}
+{{- if .IsTranslated -}}
+  {{- range .AllTranslations -}}
+    {{- if eq .Lang $defaultSite.Language.Lang -}}
+      {{- $xDefault = .Permalink -}}
+    {{- end -}}
+  {{- end -}}
+{{- else if ne .Lang $defaultSite.Language.Lang -}}
+  {{- $defaultPage := site.GetPage .TranslationKey -}}
+  {{- with $defaultPage -}}
+    {{- $xDefault = .Permalink -}}
+  {{- else -}}
+    {{- $xDefault = $defaultSite.Home.Permalink -}}
+  {{- end -}}
+{{- end -}}
+<link rel="alternate" hreflang="x-default" href="{{ $xDefault }}">
 
 <noscript>
     <style>
