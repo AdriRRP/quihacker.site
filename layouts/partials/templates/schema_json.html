@@ -91,8 +91,12 @@
     {{- end }}
   {{- end -}}
   {{- if .Params.profilePage }}
-  "datePublished": {{ .Date }},
-  "dateModified": {{ .Lastmod }},
+  {{- with .Date }}
+  "datePublished": {{ . }},
+  {{- end }}
+  {{- with .Lastmod }}
+  "dateModified": {{ . }},
+  {{- end }}
   "mainEntity": {
     "@type": "Person",
     "name": {{ .Params.author | default site.Params.author }},
