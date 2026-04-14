@@ -135,10 +135,17 @@
   "publisher": {
     "@type": "{{- ( site.Params.schema.publisherType | default "Organization") | title -}}",
     "name": {{ site.Params.schema.publisherName | default site.Params.author | default site.Title }},
+    {{- if (eq site.Params.schema.publisherType "Person") }}
+    "image": {
+      "@type": "ImageObject",
+      "url": {{ site.Params.assets.favicon | default "favicon.ico" | absURL }}
+    }
+    {{- else }}
     "logo": {
       "@type": "ImageObject",
       "url": {{ site.Params.assets.favicon | default "favicon.ico" | absURL }}
     }
+    {{- end }}
   }
 }
 </script>
