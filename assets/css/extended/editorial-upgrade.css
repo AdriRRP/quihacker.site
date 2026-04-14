@@ -1,0 +1,198 @@
+@import url("https://fonts.googleapis.com/css2?family=Alegreya:wght@500;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap");
+
+body {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "liga" 1, "kern" 1, "cv11" 1;
+}
+
+button,
+input,
+textarea,
+select,
+.button,
+#menu a,
+.post-meta,
+.entry-footer,
+.breadcrumbs,
+.terms-tags a,
+.post-tags a,
+.paginav,
+.profile .social-icons a,
+.whoami-company__period,
+.whoami-role__dates {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+}
+
+code,
+pre,
+kbd,
+samp,
+.copy-code,
+.whoami-duration {
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.logo a,
+.profile h1,
+.post-title,
+.page-header h1,
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6,
+.post-entry .entry-header h2,
+.archive-entry-title,
+.whoami-exp__title,
+.whoami-company__name,
+.paginav .title {
+  font-family: "Alegreya", Georgia, serif;
+}
+
+#menu a {
+  font-size: 0.96rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.logo a {
+  font-size: 1.22rem;
+  font-weight: 700;
+}
+
+.profile h1 {
+  max-width: 26rem;
+  font-size: clamp(2.8rem, 5vw, 4.1rem);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+}
+
+.profile .profile_inner > span {
+  max-width: 34rem;
+  font-size: 1.02rem;
+  line-height: 1.62;
+}
+
+.page-header h1,
+.post-title {
+  letter-spacing: -0.01em;
+  line-height: 1.02;
+}
+
+.post-description,
+.post-content,
+.entry-content {
+  font-size: 0.98rem;
+}
+
+.profile .social-icons {
+  margin-top: 0.55rem;
+}
+
+.post-entry {
+  padding: 16px 18px;
+  border-radius: 16px;
+}
+
+.post-entry .entry-header h2,
+.post-entry .entry-header h2 a {
+  font-size: 1.35rem;
+  line-height: 1.15;
+}
+
+.post-entry .entry-content {
+  margin-top: 0.15rem !important;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.post-entry .entry-footer,
+.post-entry .post-meta {
+  margin-top: 0.55rem !important;
+  font-size: 0.88rem;
+  letter-spacing: 0.01em;
+}
+
+.post-entry .entry-cover {
+  border-radius: 14px;
+}
+
+.post-content h2 {
+  font-size: clamp(1.9rem, 3.2vw, 2.35rem);
+  line-height: 1.08;
+}
+
+.post-content h3 {
+  font-size: clamp(1.45rem, 2.4vw, 1.8rem);
+  line-height: 1.12;
+}
+
+.post-content p,
+.post-content li,
+.post-content blockquote,
+.whoami-role__highlights li {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.post-meta,
+.entry-footer,
+.breadcrumbs,
+.whoami-company__period,
+.whoami-role__dates {
+  font-size: 0.88rem;
+  letter-spacing: 0.01em;
+}
+
+.terms-tags a,
+.post-tags a,
+.button {
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.paginav .title {
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+}
+
+.paginav a span:last-child {
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.whoami-company__name {
+  font-size: 1.18rem;
+}
+
+.whoami-role__title {
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+
+  .profile h1 {
+    max-width: 20rem;
+    font-size: clamp(2.4rem, 8vw, 3.2rem);
+  }
+
+  .post-entry .entry-header h2,
+  .post-entry .entry-header h2 a {
+    font-size: 1.22rem;
+  }
+
+  .post-content p,
+  .post-content li,
+  .post-content blockquote,
+  .whoami-role__highlights li {
+    font-size: 0.97rem;
+  }
+}
