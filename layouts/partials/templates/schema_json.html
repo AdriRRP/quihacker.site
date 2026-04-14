@@ -138,7 +138,7 @@
     {{- if (eq site.Params.schema.publisherType "Person") }}
     "image": {
       "@type": "ImageObject",
-      "url": {{ site.Params.assets.favicon | default "favicon.ico" | absURL }}
+      "url": {{ site.Params.schema.image | default site.Params.profileMode.imageUrl | default site.Params.assets.favicon | default "favicon.ico" | absURL }}
     }
     {{- else }}
     "logo": {
