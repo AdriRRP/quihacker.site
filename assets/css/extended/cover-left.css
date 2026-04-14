@@ -1,0 +1,153 @@
+/* =========================================================
+   Quihacker Cards — Listados con miniatura a la izquierda
+   - Homogeneiza home, secciones, series y tags
+   - Título+extracto+meta a la derecha, sin huecos
+   - “Stretched link” para que toda la card sea clicable
+   ========================================================= */
+
+:root{
+  --qh-thumb-w: 176px;        /* ancho de miniatura */
+  --qh-card-radius: 12px;     /* radio del borde de la card */
+  --qh-gap: 14px;             /* separación entre imagen y texto */
+  --qh-tax-title-gap: 1rem;   /* espacio bajo el H1 de taxonomías */
+}
+
+/* Fondo de listados transparente (series/tags/sections) */
+.list{ background: transparent; }
+
+/* Cabecera de listados sin “bloque gris” ni sombra */
+body.list .page-header,
+body.list main.list > .qh-page-header{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 0 var(--qh-tax-title-gap) !important;
+}
+body.list .breadcrumbs{ margin: 0 0 calc(var(--qh-tax-title-gap)/2) !important; }
+
+/* -------- Card base -------- */
+.post-entry{
+  position: relative;                 /* para stretched-link */
+  padding: 14px 16px;
+  border-radius: var(--qh-card-radius);
+  margin-bottom: 12px;
+}
+
+/* Layout con cover a la izquierda ocupando el alto */
+.post-entry:has(.entry-cover){
+  display: grid;
+  grid-template-columns: var(--qh-thumb-w) 1fr;  /* miniatura | contenido */
+  grid-template-rows: auto auto auto;           /* título | extracto | meta */
+  column-gap: var(--qh-gap);
+  row-gap: 0;                                    /* sin huecos verticales */
+  align-items: start;
+}
+
+/* Bloque de portada */
+.post-entry .entry-cover{
+  grid-column: 1;
+  grid-row: 1 / span 3;                          /* abarca título+extracto+meta */
+  margin: 0;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.post-entry .entry-cover img,
+.post-entry .entry-cover a{
+  display: block;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+/* Texto a la derecha (sin espacios fantasma) */
+.post-entry .entry-header{ grid-column: 2; grid-row: 1; margin: 0 !important; }
+.post-entry .entry-header h2,
+.post-entry .entry-header h2 a{
+  margin: 0 !important; line-height: 1.25; font-size: 1.22rem;
+}
+
+.post-entry .entry-content{
+  grid-column: 2; grid-row: 2;
+  margin: 0 !important;
+  color: var(--secondary);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+/* Por si el extracto trae márgenes internos */
+.post-entry .entry-content > :is(p,ul,ol){ margin: 0 !important; }
+
+/* Meta compacta + fechas en cursiva */
+.post-entry .post-meta,
+.post-entry .entry-footer{
+  grid-column: 2; grid-row: 3;
+  margin: .3rem 0 0 !important;
+  font-size: .92rem;
+  font-style: italic;
+}
+.post-entry .post-meta time,
+.post-entry .post-meta .post-date{ font-style: italic; } /* refuerzo */
+
+/* -------- Stretched link (toda la card clicable) -------- */
+.post-entry .entry-link{
+  position: absolute; inset: 0;
+  border-radius: var(--qh-card-radius);
+  z-index: 10;
+}
+/* Mantén enlaces internos por encima del overlay */
+.post-entry .entry-header a,
+.post-entry .entry-cover a,
+.post-entry .post-meta a{ position: relative; z-index: 11; }
+.post-entry .entry-link:focus-visible{
+  outline: 2px solid var(--primary); outline-offset: 2px;
+}
+
+/* ===== Mobile fallback: NO grid, todo apilado ===== */
+@media (max-width: 680px) {
+
+  /* La card se comporta como bloque normal */
+  .post-entry {
+    display: block !important; /* cancela grid en móvil */
+  }
+
+  /* La cover visible y con altura correcta */
+  .post-entry .entry-cover {
+    display: block !important;
+    width: 100%;
+    margin: 0 0 8px 0;
+    border-radius: 10px;
+    overflow: hidden;
+    height: auto !important;
+    aspect-ratio: 16 / 9;  /* da altura sin depender de grid */
+  }
+  .post-entry .entry-cover a,
+  .post-entry .entry-cover img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* Título / extracto / meta en flujo normal */
+  .post-entry .entry-header,
+  .post-entry .entry-content,
+  .post-entry .post-meta,
+  .post-entry .entry-footer {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  /* Un poco más de texto en móvil si quieres */
+  .post-entry .entry-content {
+    -webkit-line-clamp: 3;
+  }
+
+  /* Evita que la fecha se monte encima del extracto */
+  .post-entry .post-meta,
+  .post-entry .entry-footer {
+    margin-top: .5rem !important;
+    clear: both;           /* por si algún tema flota elementos */
+    position: static;      /* asegura flujo normal */
+  }
+}

@@ -1,3 +1,6 @@
+description = "Technical notes by Adrian \"Quihacker\" Ramos about Rust, hardware hacking, software architecture, offensive cybersecurity, and pragmatic AI."
+keywords = ["Rust", "hardware hacking", "ESP32", "software architecture", "cybersecurity", "event sourcing", "DDD", "AI"]
+
 [profileMode]
 title = "Quihacker's Lab"
 subtitle = "Compiling entropy, exploiting chaos."

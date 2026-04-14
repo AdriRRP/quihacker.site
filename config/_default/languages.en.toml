@@ -2,6 +2,6 @@ languageName = "🇬🇧"
 weight = 2
 
 [params]
+languageAltTitle = "English"
 displayFullLangName = true
 subtitle = "Compiling entropy, exploiting chaos."
-

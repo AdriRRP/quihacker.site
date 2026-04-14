@@ -2,5 +2,6 @@ languageName = "🇪🇸"
 weight = 1
 
 [params]
+languageAltTitle = "Español"
 displayFullLangName = true
 subtitle = "Compilando entropía, explotando el caos."

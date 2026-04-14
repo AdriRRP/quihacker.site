@@ -1,10 +1,13 @@
 # ─────────────────────────────────────────
 # Hugo
 # ─────────────────────────────────────────
-/public/                 # Salida del build (la genera Hugo)
-/resources/              # Caché de transformaciones (imágenes, SCSS, minificación)
+# Salida del build (la genera Hugo)
+/public/
+# Caché de transformaciones (imágenes, SCSS, minificación)
+/resources/
 .hugo_build.lock
-hugo_stats.json          # Si usas Tailwind/critters/etc.
+# Si usas Tailwind/critters/etc.
+hugo_stats.json
 
 # Si algún día decides publicar el sitio subiendo "public/" (no recomendado con GH Actions),
 # comenta la línea /public/ de arriba.
@@ -53,7 +56,8 @@ Desktop.ini
 # Editores/IDEs
 # ─────────────────────────────────────────
 .vscode/
-!.vscode/extensions.json   # opcional: permite recomendar extensiones sin subir tu config personal
+# opcional: permite recomendar extensiones sin subir tu config personal
+!.vscode/extensions.json
 .idea/
 *.iml
 
@@ -69,6 +73,3 @@ Desktop.ini
 *.tmp
 *.temp
 *.bak
-public/
-resources/
-.hugo_build.lock

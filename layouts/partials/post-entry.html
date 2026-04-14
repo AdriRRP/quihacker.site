@@ -1,0 +1,33 @@
+<article class="post-entry">
+  {{/* ---- COVER ---- */}}
+  {{ $cover := "" }}
+  {{ with .Params.cover }}{{ if .image }}{{ $cover = .image }}{{ end }}{{ end }}
+  {{ if and $cover (not .Params.cover.hiddenInList) }}
+    <figure class="entry-cover">
+      {{ $coverAlt := .Params.cover.alt | default .Title }}
+      {{ if .Params.cover.relative }}
+        {{ with $.Resources.GetMatch $cover }}
+          <img src="{{ .RelPermalink }}" alt="{{ $coverAlt }}" loading="lazy" decoding="async">
+        {{ else }}
+          <img src="{{ $cover | relURL }}" alt="{{ $coverAlt }}" loading="lazy" decoding="async">
+        {{ end }}
+      {{ else }}
+        <img src="{{ $cover | relURL }}" alt="{{ $coverAlt }}" loading="lazy" decoding="async">
+      {{ end }}
+    </figure>
+  {{ end }}
+
+  <header class="entry-header">
+    <h2>{{ .Title }}</h2>
+  </header>
+
+  <div class="entry-content">
+    {{/* ¡Clave!: resumen sin HTML y acotado */}}
+    {{ with .Summary }}{{ . | plainify | truncate 180 }}{{ end }}
+  </div>
+
+  <footer class="entry-footer">
+    {{ partial "post_meta.html" . }}
+  </footer>
+  <a class="entry-link" href="{{ .RelPermalink }}" aria-label="{{ printf "%s: %s" (cond (eq .Lang "es") "Abrir articulo" "Open post") .Title }}"></a>
+</article>

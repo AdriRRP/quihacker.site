@@ -11,9 +11,10 @@
 </header>
 {{- end }}
 
+{{- $terms := .Data.Terms.Alphabetical }}
 <ul class="terms-tags">
   {{- $type := .Type }}
-  {{- range $key, $value := .Data.Terms.Alphabetical }}
+  {{- range $key, $value := $terms }}
     {{- $name := .Name }}   {{/* nombre del término tal cual lo guarda Hugo */}}
     {{- $count := .Count }}
     {{- $p := site.GetPage (printf "/%s/%s" $type ($name | urlize)) }}
@@ -29,5 +30,11 @@
     </li>
   {{- end }}
 </ul>
+
+{{- if eq (len $terms) 0 }}
+<div class="post-content">
+  <p>{{ if eq .Lang "es" }}No hay contenido público en esta sección todavía.{{ else }}There is no public content in this section yet.{{ end }}</p>
+</div>
+{{- end }}
 
 {{- end }}{{/* end main */ -}}

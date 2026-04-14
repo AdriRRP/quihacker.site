@@ -153,9 +153,21 @@
       {{- $name := or $meta.name .company -}}
 
       {{- /* Logo */ -}}
-      {{- $companyFile := printf "images/corp/%s.png" (lower $cid) -}}
-      {{- $companyFs   := printf "static/%s" $companyFile -}}
-      {{- $logo := cond (fileExists $companyFs) $companyFile "images/logo.png" -}}
+      {{- $logo := or $meta.logo "images/logo.png" -}}
+      {{- if not $meta.logo -}}
+        {{- $logoCandidates := slice
+          (printf "images/corp/%s.png" (lower $cid))
+          (printf "images/corp/%s.jpg" (lower $cid))
+          (printf "images/corp/%s.jpeg" (lower $cid))
+        -}}
+        {{- range $candidate := $logoCandidates -}}
+          {{- $candidateFs := printf "static/%s" $candidate -}}
+          {{- if fileExists $candidateFs -}}
+            {{- $logo = $candidate -}}
+            {{- break -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
 
       {{- /* Periodo total de la empresa */ -}}
       {{- $rolesAsc := sort .roles "start" "asc" -}}

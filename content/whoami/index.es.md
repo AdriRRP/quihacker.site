@@ -1,6 +1,11 @@
 +++
 title = "Whoami"
 slug = "whoami"
+description = "Perfil profesional de Adrián Ramos: software, Rust, big data, ciberseguridad ofensiva y arquitectura orientada a eventos."
+author = "Adrian Ramos"
+date = 2026-04-14T00:00:00+02:00
+lastmod = 2026-04-14T00:00:00+02:00
+profilePage = true
 showToc = false
 searchHidden = true
 rssHidden = true

@@ -1,3 +1,6 @@
+description = "Bitácora técnica de Adrian \"Quihacker\" Ramos sobre Rust, hardware hacking, arquitectura de software, ciberseguridad ofensiva e IA pragmática."
+keywords = ["Rust", "hardware hacking", "ESP32", "arquitectura de software", "ciberseguridad", "event sourcing", "DDD", "IA"]
+
 [profileMode]
 title = "El Laboratorio de Quihacker"
 subtitle = "Compilando entropía, explotando el caos."

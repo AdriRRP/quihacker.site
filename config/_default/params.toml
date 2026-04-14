@@ -1,3 +1,7 @@
+description = "Bitácora técnica de Adrian \"Quihacker\" Ramos sobre Rust, hardware hacking, arquitectura de software, ciberseguridad ofensiva e IA pragmática."
+author = "Adrian Ramos"
+keywords = ["Rust", "hardware hacking", "ESP32", "software architecture", "cybersecurity", "event sourcing", "DDD", "AI"]
+
 label.icon = "/images/logo.png"
 label.iconHeight = 45
 
@@ -12,6 +16,13 @@ favicon16x16     = "/favicon-16x16.png"
 favicon32x32     = "/favicon-32x32.png"
 apple_touch_icon = "/apple-touch-icon.png"
 safari_pinned_tab = "/favicon-32x32.png"
+
+[schema]
+publisherType = "Person"
+sameAs = [
+  "https://www.linkedin.com/in/adrian-ramos-rp",
+  "https://github.com/AdriRRP",
+]
 
 [profileMode]
 enabled = true

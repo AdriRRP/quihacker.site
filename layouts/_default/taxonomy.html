@@ -1,0 +1,21 @@
+{{ define "main" }}
+<div class="list">
+  <div class="qh-page-header">
+    {{ partial "breadcrumbs.html" . }}
+    <h1 class="qh-page-title">{{ .Title }}</h1>
+  </div>
+
+  {{ $p := .Paginate (.Pages) }}
+  {{ if gt (len $p.Pages) 0 }}
+    {{ range $p.Pages }}
+      {{ partial "post-entry.html" . }}
+    {{ end }}
+
+    {{ partial "pagination.html" . }}
+  {{ else }}
+    <div class="post-content">
+      <p>{{ if eq .Lang "es" }}No hay contenido público en esta sección todavía.{{ else }}There is no public content in this section yet.{{ end }}</p>
+    </div>
+  {{ end }}
+</div>
+{{ end }}
