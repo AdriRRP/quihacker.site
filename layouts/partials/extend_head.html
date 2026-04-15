@@ -1,0 +1,86 @@
+<script>
+  (function () {
+    function hasColorEmojiGlyph(sample) {
+      try {
+        var canvas = document.createElement('canvas');
+        canvas.width = 32;
+        canvas.height = 32;
+        var ctx = canvas.getContext('2d', { willReadFrequently: true });
+        if (!ctx) return false;
+        ctx.clearRect(0, 0, 32, 32);
+        ctx.textBaseline = 'top';
+        ctx.font = '28px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';
+        ctx.fillText(sample, 0, 0);
+        var data = ctx.getImageData(0, 0, 32, 32).data;
+        var hasInk = false;
+        var hasColor = false;
+        for (var i = 0; i < data.length; i += 4) {
+          var a = data[i + 3];
+          if (!a) continue;
+          hasInk = true;
+          var r = data[i];
+          var g = data[i + 1];
+          var b = data[i + 2];
+          if (!(r === g && g === b)) {
+            hasColor = true;
+            break;
+          }
+        }
+        return hasInk && hasColor;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function stripLeadingEmoji(text) {
+      return text.replace(/^[\p{Extended_Pictographic}\uFE0F\u200D\u{1F1E6}-\u{1F1FF}\s]+/u, '').trimStart();
+    }
+
+    function getLangFallback(link) {
+      var href = (link.getAttribute('href') || '').toLowerCase();
+      if (href.indexOf('/en/') !== -1) return 'EN';
+      if (href.indexOf('/es/') !== -1) return 'ES';
+      var label = (link.getAttribute('aria-label') || link.getAttribute('title') || '').trim();
+      if (!label) return 'LANG';
+      if (/^english$/i.test(label)) return 'EN';
+      if (/^español$/i.test(label) || /^espanol$/i.test(label) || /^spanish$/i.test(label)) return 'ES';
+      return label.slice(0, 2).toUpperCase();
+    }
+
+    var emojiOk = hasColorEmojiGlyph('🧩') || hasColorEmojiGlyph('🦀');
+    var flagOk = hasColorEmojiGlyph('🇬🇧');
+
+    window.__qhUseEmojiFallback = !emojiOk;
+    window.__qhUseFlagFallback = !flagOk;
+
+    if (!emojiOk) {
+      document.documentElement.classList.add('emoji-fallback');
+    }
+    if (!flagOk) {
+      document.documentElement.classList.add('emoji-flag-fallback');
+    }
+
+    function applyEmojiFallbacks() {
+      if (window.__qhUseEmojiFallback) {
+        document.querySelectorAll('#menu a span, .page-header h1, .post-title, .post-tags a, .terms-tags a').forEach(function (node) {
+          var cleaned = stripLeadingEmoji(node.textContent || '');
+          if (cleaned && cleaned !== node.textContent) {
+            node.textContent = cleaned;
+          }
+        });
+      }
+
+      if (window.__qhUseFlagFallback) {
+        document.querySelectorAll('.lang-switch a, .i18n_list a').forEach(function (link) {
+          link.textContent = getLangFallback(link);
+        });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', applyEmojiFallbacks, { once: true });
+    } else {
+      applyEmojiFallbacks();
+    }
+  })();
+</script>
