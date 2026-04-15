@@ -32,6 +32,10 @@
   margin-bottom: .5rem; 
 }
 
+.whoami-company__logo {
+  flex: 0 0 auto;
+}
+
 .whoami-company__logo img { 
   width: 50px; 
   height: 50px; 
@@ -40,6 +44,10 @@
   background: #fff;                         /* halo blanco para logos en dark */
   padding: 4px; 
   box-shadow: 0 2px 6px rgba(0,0,0,.1); 
+}
+
+.whoami-company__meta {
+  min-width: 0;
 }
 
 .whoami-company__name { 
@@ -238,6 +246,21 @@
 
 /* ===== Responsivo ===== */
 @media (max-width: 520px){
+  .whoami-company__header{
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .whoami-company__logo img{
+    width: 46px;
+    height: 46px;
+    padding: 3px;
+  }
+
+  .whoami-company__period{
+    white-space: normal;
+  }
+
   .whoami-role{ min-height: 44px; }
   .whoami-role__summary{
     grid-template-columns: auto 1fr;        /* caret | bloque de texto */
