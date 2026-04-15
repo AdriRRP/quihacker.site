@@ -1,5 +1,5 @@
 ---
-title: "📟🦀 ESP32 Hardware Hacking with Rust 2: The ESP32 family"
+title: "ESP32 Hardware Hacking with Rust 2: The ESP32 family"
 date: 2025-10-21
 draft: true
 tags:

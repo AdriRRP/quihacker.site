@@ -1,5 +1,5 @@
 ---
-title: "🚨📡 V16 IoT Beacon 5: Facing the Modem — AT, UDP, and Telemetry Reverse Engineering"
+title: "V16 IoT Beacon 5: Facing the Modem — AT, UDP, and Telemetry Reverse Engineering"
 date: 2026-04-15
 draft: true
 description: "Functional reverse engineering of the MCU↔modem channel: AT commands, UDP socket usage, payloads, and early correlations."

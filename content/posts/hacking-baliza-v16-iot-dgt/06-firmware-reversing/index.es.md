@@ -1,5 +1,5 @@
 ---
-title: "🚨📡 Baliza V16 IoT 6: Firmware, RAM y siguientes pasos de reversing"
+title: "Baliza V16 IoT 6: Firmware, RAM y siguientes pasos de reversing"
 date: 2026-04-15
 draft: true
 description: "Qué podría contarse sobre firmware y reversing sin prometer de más: RAM, límites reales y próximos pasos con sentido."

@@ -1,5 +1,5 @@
 ---
-title: "🚨📡 Baliza V16 IoT 5: Frente al módem — AT, UDP y reverse de la telemetría"
+title: "Baliza V16 IoT 5: Frente al módem — AT, UDP y reverse de la telemetría"
 date: 2026-04-15
 draft: true
 description: "Reverse funcional del canal MCU↔módem: comandos AT, socket UDP, payloads y primeras correlaciones útiles."

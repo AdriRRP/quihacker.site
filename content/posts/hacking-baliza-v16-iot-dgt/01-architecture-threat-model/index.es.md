@@ -1,5 +1,5 @@
 ---
-title: "🚨📡 Baliza V16 IoT 1: Arquitectura, conectividad y modelo de amenazas"
+title: "Baliza V16 IoT 1: Arquitectura, conectividad y modelo de amenazas"
 date: 2026-04-15
 draft: true
 description: "Qué hay dentro de una baliza V16 IoT conectada, cómo está organizada y qué superficies de ataque merece la pena analizar."

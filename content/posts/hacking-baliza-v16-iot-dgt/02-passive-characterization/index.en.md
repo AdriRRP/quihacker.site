@@ -1,5 +1,5 @@
 ---
-title: "🚨📡 V16 IoT Beacon 2: Passive Characterization and Surface Reduction"
+title: "V16 IoT Beacon 2: Passive Characterization and Surface Reduction"
 date: 2026-04-15
 draft: true
 description: "How to reduce dozens of pads to a few useful candidates through passive measurement and electrical classification."

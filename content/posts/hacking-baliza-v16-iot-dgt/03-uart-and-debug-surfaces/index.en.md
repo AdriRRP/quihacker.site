@@ -1,5 +1,5 @@
 ---
-title: "🚨📡 V16 IoT Beacon 3: UART, System Console, and Debug Surfaces"
+title: "V16 IoT Beacon 3: UART, System Console, and Debug Surfaces"
 date: 2026-04-15
 draft: true
 description: "UART identification, first useful captures, and an initial delimitation of the debug surface."

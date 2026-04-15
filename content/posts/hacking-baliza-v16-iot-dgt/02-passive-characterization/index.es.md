@@ -1,5 +1,5 @@
 ---
-title: "🚨📡 Baliza V16 IoT 2: Caracterización pasiva y reducción de la superficie"
+title: "Baliza V16 IoT 2: Caracterización pasiva y reducción de la superficie"
 date: 2026-04-15
 draft: true
 description: "Cómo reducir decenas de pads a unos pocos candidatos útiles mediante medidas pasivas y clasificación eléctrica."

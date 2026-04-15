@@ -1,5 +1,5 @@
 ---
-title: "🚨📡 V16 IoT Beacon 6: Firmware, RAM, and the Next Reversing Steps"
+title: "V16 IoT Beacon 6: Firmware, RAM, and the Next Reversing Steps"
 date: 2026-04-15
 draft: true
 description: "What can be said about firmware and reversing without overpromising: RAM, real limits, and meaningful next steps."

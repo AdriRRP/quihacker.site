@@ -1,5 +1,5 @@
 ---
-title: "🚨📡 V16 IoT Beacon 1: Architecture, Connectivity, and Threat Model"
+title: "V16 IoT Beacon 1: Architecture, Connectivity, and Threat Model"
 date: 2026-04-15
 draft: true
 description: "What is inside a connected V16 beacon, how it is organized, and which attack surfaces are worth analyzing."

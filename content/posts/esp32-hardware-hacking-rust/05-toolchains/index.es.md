@@ -1,5 +1,5 @@
 ---
-title: "📟🦀 Hardware Hacking en ESP32 con Rust 5: Toolchains"
+title: "Hardware Hacking en ESP32 con Rust 5: Toolchains"
 date: 2025-10-21
 draft: true
 tags:

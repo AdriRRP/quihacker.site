@@ -1,5 +1,5 @@
 ---
-title: "📟🦀 ESP32 Hardware Hacking with Rust 4: The ESP32 ISA"
+title: "ESP32 Hardware Hacking with Rust 4: The ESP32 ISA"
 date: 2025-10-21
 draft: true
 tags:

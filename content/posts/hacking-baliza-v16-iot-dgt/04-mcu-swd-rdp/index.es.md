@@ -1,5 +1,5 @@
 ---
-title: "🚨📡 Baliza V16 IoT 4: Frente a la MCU — SWD, reset sincronizado y RDP"
+title: "Baliza V16 IoT 4: Frente a la MCU — SWD, reset sincronizado y RDP"
 date: 2026-04-15
 draft: true
 description: "Interacción real con la MCU: SWD funcional, control del arranque y límites impuestos por RDP."

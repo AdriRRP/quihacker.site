@@ -1,5 +1,5 @@
 ---
-title: "🚨📡 Baliza V16 IoT 3: UART, consola de sistema y superficies de debug"
+title: "Baliza V16 IoT 3: UART, consola de sistema y superficies de debug"
 date: 2026-04-15
 draft: true
 description: "Identificación de UART, primeras capturas útiles y delimitación inicial de la superficie de debug."

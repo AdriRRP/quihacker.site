@@ -1,21 +1,71 @@
-{{ define "main" }}
-<div class="list">
-  <div class="qh-page-header">
-    {{ partial "breadcrumbs.html" . }}
-    <h1 class="qh-page-title">{{ .Title }}</h1>
+{{- define "main" }}
+
+{{- $pages := .Pages }}
+{{- $hasPages := gt (len $pages) 0 }}
+{{- $paginator := .Paginate $pages }}
+
+<header class="page-header">
+  <h1>
+    {{ .Title }}
+    {{- if and $hasPages (eq .Kind `term`) (.Param "ShowRssButtonInSectionTermList") }}
+    {{- with .OutputFormats.Get "rss" }}
+    <a href="{{ .RelPermalink }}" title="RSS" aria-label="RSS">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" height="23">
+        <path d="M4 11a9 9 0 0 1 9 9" />
+        <path d="M4 4a16 16 0 0 1 16 16" />
+        <circle cx="5" cy="19" r="1" />
+      </svg>
+    </a>
+    {{- end }}
+    {{- end }}
+  </h1>
+  {{- if .Description }}
+  <div class="post-description">
+    {{ .Description | markdownify }}
   </div>
+  {{- end }}
+</header>
 
-  {{ $p := .Paginate (.Pages) }}
-  {{ if gt (len $p.Pages) 0 }}
-    {{ range $p.Pages }}
-      {{ partial "post-entry.html" . }}
-    {{ end }}
-
-    {{ partial "pagination.html" . }}
-  {{ else }}
-    <div class="post-content">
-      <p>{{ if eq .Lang "es" }}No hay contenido público en esta sección todavía.{{ else }}There is no public content in this section yet.{{ end }}</p>
-    </div>
-  {{ end }}
+{{- if .Content }}
+<div class="post-content">
+  {{- if not (.Param "disableAnchoredHeadings") }}
+  {{- partial "anchored_headings.html" .Content -}}
+  {{- else }}{{ .Content }}{{ end }}
 </div>
-{{ end }}
+{{- end }}
+
+{{- range $paginator.Pages }}
+  {{- partial "post-entry.html" . }}
+{{- end }}
+
+{{- if not $hasPages }}
+<div class="post-content">
+  <p>{{ if eq .Lang "es" }}No hay contenido público en esta sección todavía.{{ else }}There is no public content in this section yet.{{ end }}</p>
+</div>
+{{- end }}
+
+{{- if gt $paginator.TotalPages 1 }}
+<footer class="page-footer">
+  <nav class="pagination">
+    {{- if $paginator.HasPrev }}
+    <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">
+      «&nbsp;{{ i18n "prev_page" }}&nbsp;
+      {{- if (.Param "ShowPageNums") }}
+      {{- sub $paginator.PageNumber 1 }}/{{ $paginator.TotalPages }}
+      {{- end }}
+    </a>
+    {{- end }}
+    {{- if $paginator.HasNext }}
+    <a class="next" href="{{ $paginator.Next.URL | absURL }}">
+      {{- i18n "next_page" }}&nbsp;
+      {{- if (.Param "ShowPageNums") }}
+      {{- add 1 $paginator.PageNumber }}/{{ $paginator.TotalPages }}
+      {{- end }}&nbsp;»
+    </a>
+    {{- end }}
+  </nav>
+</footer>
+{{- end }}
+
+{{- end }}

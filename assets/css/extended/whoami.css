@@ -176,26 +176,24 @@
 
 /* ===== Avatar a la izquierda (capitular) ===== */
 .whoami-hero {
-  margin: 0 0 1.25rem;
-}
-.whoami-hero::after {
-  content: "";
-  display: table;
-  clear: both;                              /* el contenedor recoge la altura del float */
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  align-items: center;
+  gap: 1.4rem;
+  margin: 0 0 1.4rem;
 }
 .whoami-hero img {
-  float: left;
   width: 140px;
   height: 140px;
   object-fit: cover;
   border-radius: 16px;
-  margin: 0 1rem .6rem 0;                   /* separación a la derecha y abajo */
+  margin: 0;
+}
+.whoami-hero .text {
+  min-width: 0;
 }
 .whoami-hero .text > :first-child {
-  margin-top: 0;                            /* evita hueco extra arriba */
-}
-.whoami-hero .text > :not(:first-child) {
-  clear: both;                              /* los siguientes párrafos bajan debajo */
+  margin-top: 0;
 }
 
 /* ===== Tema: ajustes light/dark ===== */
@@ -254,29 +252,16 @@
 }
 
 @media (max-width: 640px) {
+  .whoami-hero {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 0.95rem;
+  }
   .whoami-hero img {
-    float: none;
     width: 120px;
     height: 120px;
-    margin: 0 0 .75rem 0;
-  }
-  .whoami-hero .text > :not(:first-child) {
-    clear: none;
-  }
-}
-
-/* Móvil: si no hay interlineado, centra el hero */
-@media (max-width: 640px) {
-  .whoami-hero img {
-    float: none;                 /* sin float */
-    display: block;              /* permite centrar con márgenes */
-    width: 120px;
-    height: 120px;
-    margin: 0 auto .75rem auto;  /* centrado horizontal */
-  }
-  /* El texto ya no “salta” por el float: queda debajo del logo */
-  .whoami-hero .text > :not(:first-child) {
-    clear: none;
+    margin: 0;
   }
 }
 

@@ -5,6 +5,7 @@ description = "Profile of Adrian Ramos: software, systems, Rust, and offensive s
 author = "Adrian Ramos"
 profilePage = true
 showToc = false
+showBreadCrumbs = false
 searchHidden = true
 rssHidden = true
 draft = false

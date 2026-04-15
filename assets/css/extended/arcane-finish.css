@@ -281,7 +281,7 @@ body::before {
 
 .page-header .breadcrumbs,
 .post-header .breadcrumbs {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   width: fit-content;
   margin-bottom: 1.15rem;
@@ -406,14 +406,14 @@ body::before {
   position: relative;
   display: inline-block;
   padding-right: 1rem;
-  padding-left: 1rem;
+  padding-left: 1.35rem;
 }
 
 .whoami-exp__title::before,
 .page-header h1::before {
   content: "◇";
   position: absolute;
-  left: 0;
+  left: 0.08rem;
   top: 50%;
   font-size: 0.6em;
   color: var(--qh-copper);
@@ -650,7 +650,7 @@ body::before {
 
   .whoami-exp__title,
   .page-header h1 {
-    padding-left: 0.8rem;
+    padding-left: 1.08rem;
   }
 
   .page-header .breadcrumbs,

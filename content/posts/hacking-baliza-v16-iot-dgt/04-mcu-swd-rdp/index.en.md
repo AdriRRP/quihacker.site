@@ -1,5 +1,5 @@
 ---
-title: "🚨📡 V16 IoT Beacon 4: Facing the MCU — SWD, Synchronized Reset, and RDP"
+title: "V16 IoT Beacon 4: Facing the MCU — SWD, Synchronized Reset, and RDP"
 date: 2026-04-15
 draft: true
 description: "Real interaction with the MCU: working SWD, early boot control, and the limits imposed by RDP."

@@ -5,6 +5,7 @@ description = "Perfil de Adrián Ramos: software, sistemas, Rust y cibersegurida
 author = "Adrian Ramos"
 profilePage = true
 showToc = false
+showBreadCrumbs = false
 searchHidden = true
 rssHidden = true
 draft = false
