@@ -17,8 +17,8 @@ body,
 }
 
 .header {
-  background: rgba(241, 233, 221, 0.86);
-  border-bottom: 1px solid rgba(124, 96, 66, 0.10);
+  background: rgba(220, 208, 191, 0.92);
+  border-bottom: 1px solid rgba(124, 96, 66, 0.16);
   backdrop-filter: blur(10px);
 }
 
@@ -75,9 +75,12 @@ body,
 }
 
 .profile .profile_inner > span {
+  display: block;
   max-width: 40rem;
-  font-size: 0.94rem;
-  line-height: 1.5;
+  font-size: clamp(1.24rem, 2vw, 1.34rem);
+  font-weight: 500;
+  line-height: 1.66;
+  letter-spacing: 0.01em;
   color: var(--secondary);
   margin-top: -0.35rem;
 }
@@ -219,7 +222,7 @@ body:not(.dark) .whoami-company {
   }
 
   .profile .profile_inner > span {
-    font-size: 0.9rem;
+    font-size: 1.12rem;
   }
 
   .profile h1 {

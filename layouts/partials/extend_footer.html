@@ -1,11 +1,86 @@
-{{ if .Page.Store.Get "hasMermaid" }}
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js" defer></script>
+{{ if .IsPage }}
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      if (window.mermaid) {
-        const dark = document.documentElement.dataset.scheme === 'dark';
-        mermaid.initialize({ startOnLoad: true, theme: dark ? 'dark' : 'default' });
+    (function () {
+      const getMermaidConfig = () => {
+        const dark = document.body.classList.contains('dark');
+        return {
+          startOnLoad: false,
+          securityLevel: 'loose',
+          look: 'handDrawn',
+          theme: 'base',
+          themeVariables: dark ? {
+            darkMode: true,
+            background: '#1d1f20',
+            primaryColor: '#2f3433',
+            primaryTextColor: '#dbe6de',
+            primaryBorderColor: '#64d39a',
+            lineColor: '#64d39a',
+            textColor: '#dbe6de',
+            noteBkgColor: '#2b3130',
+            noteTextColor: '#dbe6de',
+            noteBorderColor: '#7ce5ae',
+            actorBkg: '#2f3433',
+            actorBorder: '#64d39a',
+            actorTextColor: '#dbe6de',
+            labelBoxBkgColor: '#2f3433',
+            labelTextColor: '#dbe6de',
+            labelBoxBorderColor: '#64d39a',
+            edgeLabelBackground: '#222726'
+          } : {
+            darkMode: false,
+            background: '#f1e9dd',
+            primaryColor: '#fbf8f1',
+            primaryTextColor: '#2d241d',
+            primaryBorderColor: '#7b5d3f',
+            lineColor: '#7b5d3f',
+            textColor: '#2d241d',
+            noteBkgColor: '#fffaf0',
+            noteTextColor: '#2d241d',
+            noteBorderColor: '#8f6e4d',
+            actorBkg: '#fbf8f1',
+            actorBorder: '#7b5d3f',
+            actorTextColor: '#2d241d',
+            labelBoxBkgColor: '#fbf8f1',
+            labelTextColor: '#2d241d',
+            labelBoxBorderColor: '#7b5d3f',
+            edgeLabelBackground: '#f7f1e5'
+          }
+        };
+      };
+
+      const hydrateMermaidSources = () => {
+        document.querySelectorAll('.mermaid-diagram').forEach((block) => {
+          const source = block.querySelector('.mermaid-source');
+          const diagram = block.querySelector('.mermaid');
+          if (!source || !diagram) return;
+          diagram.removeAttribute('data-processed');
+          diagram.innerHTML = source.innerHTML.trim();
+        });
+      };
+
+      const renderMermaid = async () => {
+        if (!document.querySelector('.mermaid-diagram')) return;
+        if (!window.mermaid) return;
+        hydrateMermaidSources();
+        mermaid.initialize(getMermaidConfig());
+        await mermaid.run({ querySelector: '.mermaid' });
+      };
+
+      const boot = () => { renderMermaid().catch(() => {}); };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', boot, { once: true });
+      } else {
+        boot();
       }
-    });
+
+      const toggle = document.getElementById('theme-toggle');
+      if (toggle) {
+        toggle.addEventListener('click', () => {
+          setTimeout(() => { renderMermaid().catch(() => {}); }, 10);
+        });
+      }
+    })();
   </script>
 {{ end }}

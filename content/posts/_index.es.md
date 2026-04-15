@@ -1,4 +1,4 @@
 ---
 title: Artículos
-description: "Artículos técnicos sobre Rust, hardware hacking, arquitectura de software, ciberseguridad e IA pragmática."
+description: "Investigación, ingeniería inversa y notas técnicas sobre sistemas, software y seguridad."
 ---

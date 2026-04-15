@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Alegreya:wght@500;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap");
 
 body {
   font-family: "IBM Plex Sans", system-ui, sans-serif;
@@ -51,7 +51,7 @@ samp,
 .whoami-exp__title,
 .whoami-company__name,
 .paginav .title {
-  font-family: "Alegreya", Georgia, serif;
+  font-family: "Newsreader", Georgia, serif;
 }
 
 #menu a {
@@ -67,9 +67,9 @@ samp,
 
 .profile h1 {
   max-width: 26rem;
-  font-size: clamp(2.8rem, 5vw, 4.1rem);
-  line-height: 0.98;
-  letter-spacing: -0.01em;
+  font-size: clamp(2.65rem, 4.75vw, 3.9rem);
+  line-height: 0.96;
+  letter-spacing: -0.015em;
 }
 
 .profile .profile_inner > span {
@@ -80,8 +80,8 @@ samp,
 
 .page-header h1,
 .post-title {
-  letter-spacing: -0.01em;
-  line-height: 1.02;
+  letter-spacing: -0.015em;
+  line-height: 0.98;
 }
 
 .post-description,
@@ -101,8 +101,8 @@ samp,
 
 .post-entry .entry-header h2,
 .post-entry .entry-header h2 a {
-  font-size: 1.35rem;
-  line-height: 1.15;
+  font-size: 1.28rem;
+  line-height: 1.1;
 }
 
 .post-entry .entry-content {
@@ -123,13 +123,13 @@ samp,
 }
 
 .post-content h2 {
-  font-size: clamp(1.9rem, 3.2vw, 2.35rem);
-  line-height: 1.08;
+  font-size: clamp(1.82rem, 3vw, 2.22rem);
+  line-height: 1.04;
 }
 
 .post-content h3 {
-  font-size: clamp(1.45rem, 2.4vw, 1.8rem);
-  line-height: 1.12;
+  font-size: clamp(1.38rem, 2.2vw, 1.72rem);
+  line-height: 1.08;
 }
 
 .post-content p,
@@ -180,13 +180,13 @@ samp,
   }
 
   .profile h1 {
-    max-width: 20rem;
-    font-size: clamp(2.4rem, 8vw, 3.2rem);
+    max-width: 17.5rem;
+    font-size: clamp(2.12rem, 6.9vw, 2.78rem);
   }
 
   .post-entry .entry-header h2,
   .post-entry .entry-header h2 a {
-    font-size: 1.22rem;
+    font-size: 1.16rem;
   }
 
   .post-content p,

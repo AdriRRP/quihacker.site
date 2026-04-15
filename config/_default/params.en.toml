@@ -3,4 +3,4 @@ keywords = ["Rust", "hardware hacking", "ESP32", "software architecture", "cyber
 
 [profileMode]
 title = "Quihacker's Lab"
-subtitle = "Technical notes on Rust, hardware hacking, offensive security, and pragmatic AI."
+subtitle = "Compiling entropy, exploiting chaos."

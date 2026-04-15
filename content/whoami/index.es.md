@@ -1,7 +1,7 @@
 +++
 title = "Whoami"
 slug = "whoami"
-description = "Perfil profesional de Adrián Ramos: software, Rust, big data, ciberseguridad ofensiva y arquitectura orientada a eventos."
+description = "Perfil de Adrián Ramos: software, sistemas, Rust y ciberseguridad ofensiva."
 author = "Adrian Ramos"
 profilePage = true
 showToc = false
@@ -12,7 +12,7 @@ disableKinds = ['rss']
 +++
 
 {{< side-hero src="/images/logo.png" alt="Adrián “Quihacker” Ramos — Quihacker" width="140" >}}
-Ingeniero con más de una década construyendo sistemas que funcionan… y ahora también rompiéndolos para que nadie más pueda hacerlo. Combino experiencia real en desarrollo, arquitectura y datos con un enfoque creciente en ciberseguridad, donde aplico criterio de ingeniería (no checklists) para encontrar fallos de verdad. Me siento igual de cómodo diseñando una API que analizando firmware por SWD o montando tooling en Rust para automatizar lo que otros hacen a mano. Si algo es complejo, mejor: ahí es donde empiezo a divertirme… y donde suelo aportar más valor.
+Ingeniero de software y seguridad con más de una década de experiencia. Trabajo con Rust, sistemas, datos, reverse y ciberseguridad ofensiva, y suelo aportar más valor donde hay complejidad real: arquitectura, rendimiento, hardware o superficies de ataque poco amables.
 {{< /side-hero >}}
 
 {{< whoami-experience lang="es" >}}
