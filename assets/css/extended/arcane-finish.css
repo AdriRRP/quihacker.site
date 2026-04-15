@@ -401,28 +401,33 @@ body::before {
   z-index: 1;
 }
 
-.whoami-exp__title,
-.page-header h1 {
+.whoami-exp__title {
+  position: relative;
+  display: inline-block;
+}
+
+.page-header h1,
+.post-title {
   position: relative;
   display: inline-block;
   padding-right: 1rem;
-  padding-left: 1.35rem;
+  padding-left: 1.9rem;
 }
 
-.whoami-exp__title::before,
-.page-header h1::before {
+.page-header h1::before,
+.post-title::before {
   content: "◇";
   position: absolute;
-  left: 0.08rem;
+  left: 0.12rem;
   top: 50%;
-  font-size: 0.6em;
+  font-size: 0.56em;
   color: var(--qh-copper);
   transform: translateY(-50%);
   opacity: 0.9;
 }
 
-.whoami-exp__title::after,
-.page-header h1::after {
+.page-header h1::after,
+.post-title::after {
   content: "";
   position: absolute;
   left: calc(100% + 0.35rem);
@@ -643,14 +648,14 @@ body::before {
 }
 
 @media (max-width: 768px) {
-  .whoami-exp__title::after,
-  .page-header h1::after {
+  .page-header h1::after,
+  .post-title::after {
     width: 2rem;
   }
 
-  .whoami-exp__title,
-  .page-header h1 {
-    padding-left: 1.08rem;
+  .page-header h1,
+  .post-title {
+    padding-left: 1.45rem;
   }
 
   .page-header .breadcrumbs,
@@ -664,6 +669,12 @@ body::before {
   .page-header h1,
   .post-title {
     line-height: 0.98;
+  }
+
+  .page-header h1::before,
+  .post-title::before {
+    left: 0.04rem;
+    font-size: 0.5em;
   }
 }
 
