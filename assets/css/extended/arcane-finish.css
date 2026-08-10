@@ -729,7 +729,7 @@ body::before {
 
 .post-content .mermaid .label,
 .post-content .mermaid text {
-  font-family: "IBM Plex Sans", system-ui, sans-serif !important;
+  font-family: var(--font-editorial-sans) !important;
 }
 
 .dark .post-content .mermaid-diagram {
