@@ -12,7 +12,7 @@ draft = false
 disableKinds = ['rss']
 +++
 
-{{< side-hero src="/images/logo.png" alt="Adrián “Quihacker” Ramos — Quihacker" width="140" >}}
+{{< side-hero src="/images/logo.webp" alt="Adrián “Quihacker” Ramos — Quihacker" width="140" >}}
 Ingeniero de software y seguridad con más de una década de experiencia. Trabajo con Rust, sistemas, datos, reverse y ciberseguridad ofensiva, y suelo aportar más valor donde hay complejidad real: arquitectura, rendimiento, hardware o superficies de ataque poco amables.
 {{< /side-hero >}}
 

@@ -4,7 +4,7 @@ title     = "Web Development Intern | First Professional Experience"
 url       = "https://colorvivo.com/"
 start     = "2010-04"
 end       = "2010-06"
-role_icon = "/images/role/full-stack.png"
+role_icon = "/images/role/full-stack.webp"
 highlights = [
   "Primera experiencia profesional en TI tras FP: MySQL, CMS interno y automatización de traducciones para varios sites (incl. portales de gaming)."
 ]

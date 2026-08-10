@@ -153,12 +153,10 @@
       {{- $name := or $meta.name .company -}}
 
       {{- /* Logo */ -}}
-      {{- $logo := or $meta.logo "images/logo.png" -}}
+      {{- $logo := or $meta.logo "images/logo.webp" -}}
       {{- if not $meta.logo -}}
         {{- $logoCandidates := slice
-          (printf "images/corp/%s.png" (lower $cid))
-          (printf "images/corp/%s.jpg" (lower $cid))
-          (printf "images/corp/%s.jpeg" (lower $cid))
+          (printf "images/corp/%s.webp" (lower $cid))
         -}}
         {{- range $candidate := $logoCandidates -}}
           {{- $candidateFs := printf "static/%s" $candidate -}}
@@ -244,9 +242,9 @@
 
         <div class="whoami-timeline">
           {{- range $rolesDisp -}}
-            {{- $ri := or .role_icon "images/logo.png" -}}
+            {{- $ri := or .role_icon "images/logo.webp" -}}
             {{- $riFs := printf "static/%s" (trim $ri "/") -}}
-            {{- $roleIcon := cond (fileExists $riFs) $ri "images/logo.png" -}}
+            {{- $roleIcon := cond (fileExists $riFs) $ri "images/logo.webp" -}}
 
             {{- $endLower := lower (print .end) -}}
             {{- $isCurrentRole := or (eq $endLower "presente") (eq $endLower "present") -}}

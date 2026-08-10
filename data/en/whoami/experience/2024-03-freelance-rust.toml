@@ -3,7 +3,7 @@ title     = "Software Architect/Engineer | Fullstack Rust Developer 🦀"
 url       = "https://github.com/AdriRRP"
 start     = "2024-03"
 end       = "2024-09"
-role_icon = "/images/role/full-stack.png"
+role_icon = "/images/role/full-stack.webp"
 highlights = [
   "Fullstack Rust app for post-race telemetry (Axum/Tokio backend; Yew/WebAssembly frontend) with hexagonal architecture and DDD.",
   "Repo: https://github.com/AdriRRP/simracing-virtual-mentor"

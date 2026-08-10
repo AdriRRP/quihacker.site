@@ -10,12 +10,12 @@ series:
   - esp32-hardware-hacking-rust
 series_weight: 5
 cover:
-  image: "/images/posts/esp32-hardware-hacking-rust/05-toolchains.png"
+  image: "images/posts/esp32-hardware-hacking-rust/05-toolchains.webp"
   alt: "Toolchains - Quihacker"
   caption: "Toolchains"
   relative: false
   hidden: false
   hiddenInList: false
   hiddenInSingle: false
-images: ["/images/posts/esp32-hardware-hacking-rust/05-toolchains.png"]
+images: ["images/posts/esp32-hardware-hacking-rust/05-toolchains.webp"]
 ---
