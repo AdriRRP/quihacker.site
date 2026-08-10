@@ -45,6 +45,19 @@ jobs:
         run: |
           test "$(tr -d '\r\n' < static/CNAME)" = "quihacker.site"
 
+      - name: Validate drafts and future content
+        env:
+          HUGO_CACHEDIR: ${{ runner.temp }}/hugo-cache-all-content
+          HUGO_ENVIRONMENT: production
+        run: |
+          hugo \
+            --buildDrafts \
+            --buildFuture \
+            --destination "${RUNNER_TEMP}/all-content" \
+            --gc \
+            --minify \
+            --panicOnWarning
+
       - name: Build
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo-cache
