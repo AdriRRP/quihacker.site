@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ site.Language.Lang | default "es" }}">
+<html lang="{{ site.Language.Name | default "es" }}">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -79,7 +79,7 @@
     <main class="alias-card">
       <h1>{{ site.Title }}</h1>
       <p>
-        {{ if eq site.Language.Lang "en" }}Redirecting to{{ else }}Redirigiendo a{{ end }}
+        {{ if eq site.Language.Name "en" }}Redirecting to{{ else }}Redirigiendo a{{ end }}
         <a href="{{ .Permalink }}">{{ .Permalink }}</a>
       </p>
     </main>

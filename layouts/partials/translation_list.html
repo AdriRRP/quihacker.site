@@ -6,10 +6,10 @@
 <ul class="i18n_list">
     {{- range .Translations }}
     <li>
-        {{- $langLabel := .Language.Params.languageAltTitle | default (.Language.LanguageName | emojify) | default (.Lang | title) -}}
+        {{- $langLabel := .Language.Params.languageAltTitle | default (.Language.Label | emojify) | default (.Lang | title) -}}
         <a href="{{ .Permalink }}" title="{{ $langLabel }}" aria-label="{{ $langLabel }}">
-            {{- if (and site.Params.displayFullLangName (.Language.LanguageName)) }}
-            {{- .Language.LanguageName | emojify -}}
+            {{- if (and site.Params.displayFullLangName (.Language.Label)) }}
+            {{- .Language.Label | emojify -}}
             {{- else }}
             {{- .Lang | title -}}
             {{- end -}}

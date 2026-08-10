@@ -1,5 +1,5 @@
-languageCode = "es-ES"
-languageName = "🇪🇸"
+locale = "es-ES"
+label = "🇪🇸"
 weight = 1
 
 [params]

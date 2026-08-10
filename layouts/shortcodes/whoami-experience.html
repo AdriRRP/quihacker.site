@@ -9,7 +9,7 @@
 
 {{- /* (0) Data segura */ -}}
 {{- $lang := .Page.Lang | default "es" -}}
-{{- $data := index site.Data $lang | default dict -}}
+{{- $data := index hugo.Data $lang | default dict -}}
 {{- $whoami := index $data "whoami" | default dict -}}
 {{- $dir := index $whoami "experience" | default dict -}}
 

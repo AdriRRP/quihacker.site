@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-HUGO_VERSION="${HUGO_VERSION:-v0.150.0}"
+HUGO_VERSION="${HUGO_VERSION:-v0.164.0}"
 
 DRAFTS_FLAG="${DRAFTS:-0}"
 if [ "${1:-}" = "--drafts" ]; then

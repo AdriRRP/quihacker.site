@@ -1,6 +1,6 @@
 title = "Quihacker's Lab"
 baseURL = 'https://quihacker.site/'
-languageCode = 'es-ES'
+locale = 'es-ES'
 theme = 'PaperMod'
 
 # Idioma por defecto y URLs localizadas (/es/, /en/)

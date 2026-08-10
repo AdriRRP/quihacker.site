@@ -106,15 +106,15 @@
 {{- range .AllTranslations -}}
 <link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}">
 {{ end -}}
-{{- $defaultSite := index (sort site.Sites "Language.Weight") 0 -}}
+{{- $defaultSite := index hugo.Sites 0 -}}
 {{- $xDefault := .Permalink -}}
 {{- if .IsTranslated -}}
   {{- range .AllTranslations -}}
-    {{- if eq .Lang $defaultSite.Language.Lang -}}
+    {{- if eq .Lang $defaultSite.Language.Name -}}
       {{- $xDefault = .Permalink -}}
     {{- end -}}
   {{- end -}}
-{{- else if ne .Lang $defaultSite.Language.Lang -}}
+{{- else if ne .Lang $defaultSite.Language.Name -}}
   {{- $defaultPage := site.GetPage .TranslationKey -}}
   {{- with $defaultPage -}}
     {{- $xDefault = .Permalink -}}
