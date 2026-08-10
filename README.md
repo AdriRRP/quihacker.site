@@ -67,7 +67,7 @@ remove tracking query parameters before publication.
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the pull-request workflow. Report
 security issues privately as described in [SECURITY.md](SECURITY.md).
 
-No root license has been selected. Unless a license is added, the repository's
-contents are not granted for redistribution or reuse beyond rights provided by
-applicable law. PaperMod retains its own MIT license under
-`themes/PaperMod/LICENSE`.
+The original code and content in this repository are published with all rights
+reserved; see [LICENSE](LICENSE). No permission for reuse or redistribution is
+granted beyond rights provided by applicable law. Third-party components retain
+their own licenses, including PaperMod under `themes/PaperMod/LICENSE`.
