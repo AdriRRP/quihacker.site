@@ -37,9 +37,12 @@ function pageUrl(file) {
 }
 
 function extractReferences(html) {
+  const markup = html
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/<(script|style)\b([^>]*)>[\s\S]*?<\/\1\s*>/gi, "<$1$2>");
   const references = [];
   const attribute = /\b(?:href|src)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/gi;
-  for (const match of html.matchAll(attribute)) {
+  for (const match of markup.matchAll(attribute)) {
     references.push(match[1] ?? match[2] ?? match[3] ?? "");
   }
   return references;
