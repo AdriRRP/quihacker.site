@@ -1,12 +1,17 @@
-{{ if .IsPage }}
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+{{- if .Page.Store.Get "hasMermaid" }}
+  <script
+    defer
+    src="https://cdn.jsdelivr.net/npm/mermaid@11.16.1/dist/mermaid.min.js"
+    integrity="sha384-aBQXj4hK6Jm05i7aQAsUV3bLdSUrHX1BGYfMB0166TtWt/RRaw+h0Eelme9OCOvy"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
   <script>
     (function () {
       const getMermaidConfig = () => {
         const dark = document.body.classList.contains('dark');
         return {
           startOnLoad: false,
-          securityLevel: 'loose',
+          securityLevel: 'strict',
           look: 'handDrawn',
           theme: 'base',
           themeVariables: dark ? {
@@ -67,7 +72,15 @@
         await mermaid.run({ querySelector: '.mermaid' });
       };
 
-      const boot = () => { renderMermaid().catch(() => {}); };
+      const reportRenderError = (error) => {
+        window.__qhMermaidError = error;
+        console.error('Mermaid rendering failed', error);
+        document.querySelectorAll('.mermaid-diagram').forEach((diagram) => {
+          diagram.classList.add('mermaid-diagram--error');
+        });
+      };
+
+      const boot = () => { renderMermaid().catch(reportRenderError); };
 
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', boot, { once: true });
@@ -78,7 +91,7 @@
       const toggle = document.getElementById('theme-toggle');
       if (toggle) {
         toggle.addEventListener('click', () => {
-          setTimeout(() => { renderMermaid().catch(() => {}); }, 10);
+          setTimeout(() => { renderMermaid().catch(reportRenderError); }, 10);
         });
       }
     })();
