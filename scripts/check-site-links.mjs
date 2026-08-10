@@ -37,13 +37,28 @@ function pageUrl(file) {
 }
 
 function extractReferences(html) {
-  const markup = html
-    .replace(/<!--[\s\S]*?-->/g, "")
-    .replace(/<(script|style)\b([^>]*)>[\s\S]*?<\/\1\s*>/gi, "<$1$2>");
   const references = [];
+  const tag = /<!--[\s\S]*?-->|<\/?(?:script|style)\b[^>]*>|<[^>]+>/gi;
   const attribute = /\b(?:href|src)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/gi;
-  for (const match of markup.matchAll(attribute)) {
-    references.push(match[1] ?? match[2] ?? match[3] ?? "");
+  let rawTextElement = null;
+
+  for (const match of html.matchAll(tag)) {
+    const markup = match[0];
+    if (rawTextElement) {
+      const closesRawText = rawTextElement === "script"
+        ? /^<\/script\b/i.test(markup)
+        : /^<\/style\b/i.test(markup);
+      if (closesRawText) rawTextElement = null;
+      continue;
+    }
+    if (markup.startsWith("<!--")) continue;
+
+    for (const attributeMatch of markup.matchAll(attribute)) {
+      references.push(attributeMatch[1] ?? attributeMatch[2] ?? attributeMatch[3] ?? "");
+    }
+
+    const opensRawText = /^<(script|style)\b/i.exec(markup);
+    if (opensRawText) rawTextElement = opensRawText[1].toLowerCase();
   }
   return references;
 }

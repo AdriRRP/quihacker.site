@@ -4,6 +4,7 @@ import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 
 const root = path.resolve(process.argv[2] ?? "content");
+const siteOrigin = new URL("https://quihacker.site").origin;
 const failures = [];
 const warnings = [];
 
@@ -23,7 +24,11 @@ for (const file of await walk(root)) {
   const content = await readFile(file, "utf8");
   for (const match of content.matchAll(/https?:\/\/[^\s<>"']+/g)) {
     const normalized = match[0].replace(/[\])},.;:!?]+$/, "");
-    if (!normalized.startsWith("https://quihacker.site")) urls.add(normalized);
+    try {
+      if (new URL(normalized).origin !== siteOrigin) urls.add(normalized);
+    } catch {
+      failures.push(`invalid URL\t${path.relative(root, file)}\t${normalized}`);
+    }
   }
 }
 
