@@ -1,7 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Newsreader:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap");
+:root {
+  --font-editorial-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-editorial-serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+  --font-editorial-mono: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
 
 body {
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-family: var(--font-editorial-sans);
   font-size: 17px;
   line-height: 1.65;
   text-rendering: optimizeLegibility;
@@ -24,7 +28,7 @@ select,
 .profile .social-icons a,
 .whoami-company__period,
 .whoami-role__dates {
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-family: var(--font-editorial-sans);
 }
 
 code,
@@ -33,7 +37,7 @@ kbd,
 samp,
 .copy-code,
 .whoami-duration {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-editorial-mono);
 }
 
 .logo a,
@@ -51,7 +55,7 @@ samp,
 .whoami-exp__title,
 .whoami-company__name,
 .paginav .title {
-  font-family: "Newsreader", Georgia, serif;
+  font-family: var(--font-editorial-serif);
 }
 
 #menu a {
