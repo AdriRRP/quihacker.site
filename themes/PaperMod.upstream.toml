@@ -1,0 +1,16 @@
+repository = "https://github.com/adityatelange/hugo-PaperMod"
+license = "MIT"
+
+# The vendored directory was imported byte-for-byte from this upstream tree.
+vendored_commit = "ff85b9cd65790824a5bbe860e74fe96ce0ea493d"
+vendored_tree = "7153ddcdf939a555a9d18fab5f71dac5affd24ad"
+imported_on = "2025-10-15"
+
+# Upstream was reviewed through this commit. It is not yet safe to import; see
+# docs/THEME_MAINTENANCE.md for the compatibility findings and update process.
+last_reviewed_commit = "d3768854d00ad003b0a8dbdba254ce9224377a01"
+last_reviewed_on = "2026-08-10"
+
+[[local_patches]]
+commit = "24406f3ccacd4972e836fdad453d2a4f74cdadef"
+description = "Migrate vendored templates to Hugo 0.164 language APIs."
