@@ -26,7 +26,7 @@ images: ["images/posts/esp32-hardware-hacking-rust/04-isa.webp"]
 - [RISC-V: The ESP32-C and ESP32-H series are based on the RISC-V architecture.](https://en.wikipedia.org/wiki/RISC-V)
 - [Hardware Overview](https://docs.espressif.com/projects/rust/book/introduction/hardware-overview.html)
 
-# Arquitectura Xtensa (base de ESP32/ESP32-S2/ESP32-S3)
+## Arquitectura Xtensa (base de ESP32/ESP32-S2/ESP32-S3)
 
 **1) ISA configurable y extensible**
 Xtensa es una ISA “post-RISC” diseñada para configurarse por opciones (features) y, si se desea, **extenderse** con registros, instrucciones y coprocesadores mediante el marco TIE. Esto permite a un fabricante como Espressif elegir exactamente qué trae el núcleo (p. ej., bucles sin sobrecarga, atomics, FP, etc.). ([cadence.com][1])
@@ -49,13 +49,13 @@ Para multiprocesador (p. ej., ESP32 y ESP32-S3 de dos núcleos), la **Multiproce
 **7) Punto flotante, booleanos, MAC/DSP y otras opciones**
 El ISA Summary cataloga opciones como **coprocesador de punto flotante**, **boolean unit**, **MAC16** (acumulador multiplicar-acumular), etc. En el caso del **ESP32-S3**, Espressif declara un **dual-core Xtensa LX7** con **instrucciones vectoriales** para acelerar NN/DSP (detalle público limitado en los TRM, pero sí citado en *datasheet*). ([cadence.com][1])
 
-# Cómo se mapea esto en Espressif
+## Cómo se mapea esto en Espressif
 
 * **ESP32 (original)**: dual-core **Xtensa LX6** a ~240 MHz; utiliza ventana de registros, densidad de código, niveles de interrupción y primitivas de sincronización para SMP. (TRM oficial y documentación histórica). ([TME][2])
 * **ESP32-S2 / ESP32-S3**: **Xtensa LX7** (S2: 1 core; S3: 2 cores). El S3 añade **vector instructions** para IA/DSP; requiere *toolchain* específico (el cambio de LX6→LX7 implica diferente *target*). ([Seeed Studio Files][3])
 * **ESP32-C3 / C6 / H2**: migran a **RISC-V (RV32)**, sin ventanas de registros ni `L32R`; filosofía más estándar (p. ej., *compressed* y mul/div según modelo). El **C3** es **single-core RISC-V** con Wi-Fi/BLE; documentación de Espressif y presentaciones públicas confirman el perfil RV32 y ~160 MHz. ([documentation.espressif.com][4])
 
-# Ideas prácticas para programar con esto en mente
+## Ideas prácticas para programar con esto en mente
 
 * En **Xtensa (ESP32, S2, S3)** espera:
   *Llamadas baratas* (ventanas), *bucles ultrabaratos* (`LBEG/LEND/LCOUNT` si el compilador/SDK los usa), buenas **optimizaciones de tamaño** (instrucciones `.N`) y **primitivas de sincronización** útiles en FreeRTOS SMP (e.g., *spinlocks*, colas) sobre `L32AI/S32RI` o `S32C1I`. ([cadence.com][1])
@@ -64,34 +64,34 @@ El ISA Summary cataloga opciones como **coprocesador de punto flotante**, **bool
 > En resumen: los ESP32 basados en Xtensa aprovechan **ventanas de registros**, **instrucciones estrechas**, **bucles de coste cero** y **opciones de sincronización** para combinar **densidad de código**, **bajo consumo** y **SMP eficiente**; los modelos nuevos RISC-V simplifican la base ISA y dependen de las extensiones estándar. Todo esto encaja con lo que describe el *Xtensa ISA Summary* y con los TRM/datasheets de Espressif. ([cadence.com][1])
 
 [1]: https://www.cadence.com/content/dam/cadence-www/global/en_US/documents/tools/silicon-solutions/compute-ip/isa-summary.pdf "Xtensa Instruction Set Architecture (ISA) Summary for all Xtensa LX Processors"
-[2]: https://www.tme.eu/Document/b1ecc6f2da6e49ce6542a7fbedcc5775/esp32_technical_reference_manual_en.pdf?utm_source=chatgpt.com "ESP32 - Technical Reference Manual"
-[3]: https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/res/esp32-s3_datasheet.pdf?utm_source=chatgpt.com "ESP32-S3 Series - Datasheet"
-[4]: https://documentation.espressif.com/esp32-c3_technical_reference_manual_en.html?utm_source=chatgpt.com "ESP32-C3 Technical Reference Manual"
+[2]: https://www.tme.eu/Document/b1ecc6f2da6e49ce6542a7fbedcc5775/esp32_technical_reference_manual_en.pdf "ESP32 - Technical Reference Manual"
+[3]: https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/res/esp32-s3_datasheet.pdf "ESP32-S3 Series - Datasheet"
+[4]: https://documentation.espressif.com/esp32-c3_technical_reference_manual_en.html "ESP32-C3 Technical Reference Manual"
 
-# Qué es RISC-V (en una frase)
+## Qué es RISC-V (en una frase)
 
 Una **ISA abierta y modular** (royalty-free) nacida en Berkeley que define una base mínima y un **catálogo de extensiones combinables** para cubrir desde microcontroladores RV32 hasta servidores RV64/RV128. ([Wikipedia][1])
 
-# Pilares de diseño (lo esencial)
+## Pilares de diseño (lo esencial)
 
 * **Base + extensiones**: bases estándar **RV32I / RV64I / RV128I** (o **RV32E** con 16 registros para embebidos) y extensiones como **M** (mul/div), **A** (atómicos), **F/D/Q** (coma flotante), **C** (instrucciones comprimidas de 16 bit), **B** (bit-manip), **V** (vector), **H** (hipervisor), **Zicsr/Zifencei** (CSR y sincronización de i-cache). La “**G**” es un atajo usado a menudo para **IMAFD**. ([Wikipedia][1])
 * **Load-store y registros**: arquitectura **load/store** con 31 registros enteros de propósito general (x0…x31, **x0=0** cableado). Construyes inmediatos/absolutos con **LUI/AUIPC** y saltas con **JAL/JALR** (enlazan el retorno en registro). ([Wikipedia][2])
 * **Compresión de código (C)**: mezcla **natural** de instrucciones de 32 bit con sus alias de **16 bit** (no hay “modo Thumb” separado). Reduce tamaño de binarios y memoria. ([Wikipedia][2])
 
-# Concurrencia, memoria y atómicos
+## Concurrencia, memoria y atómicos
 
 * **Modelo de memoria**: **RVWMO** (weak ordering) con semánticas **acquire/release**; `fence` en la base y, con **A**, soporte **LR/SC** y **AMOs** (fetch-and-op) para construir primitivas lock-free. ([Wikipedia][1])
 
-# Privilegios, SO y virtualización
+## Privilegios, SO y virtualización
 
 * **Privilegios**: especificación **privileged** separada con **U/S/M** (usuario/supervisor/máquina) y modo **H** (hipervisor) ortogonal; soporte de **MMU** y paginación (p. e., Sv32/Sv39/Sv48). ([GitHub][3])
 * **Ecosistema**: toolchains **GCC/LLVM**, QEMU/Spike, y *mainstream* OS (Linux, BSD). **Debian** añadió soporte oficial en **Trixie (ago-2025)**. ([Wikipedia][1])
 
-# Vectores (RVV) en dos ideas
+## Vectores (RVV) en dos ideas
 
 * **Vector-length agnostic**: el **largo de vector no es fijo**; el mismo binario escala a anchos distintos (portabilidad sin recompilar). Adecuado para *kernels* de cómputo y ML. ([Wikipedia][1])
 
-# “Cómo pensar en RISC-V” si vienes de otras ISAs
+## “Cómo pensar en RISC-V” si vienes de otras ISAs
 
 * **Componible por diseño**: eliges **la mínima base** y solo las extensiones que te aportan valor (p. ej., **RV32IMC** es típico en MCUs; algunos como GD32V usan **RV32IMAC**). ([Wikipedia][1])
 * **Código compacto y claro**: **C** reduce memoria; **LUI/AUIPC** + **JAL/JALR** favorecen *position-independent code* sencillo. ([Wikipedia][2])
@@ -102,14 +102,14 @@ Una **ISA abierta y modular** (royalty-free) nacida en Berkeley que define una b
 
 Si quieres, te preparo una **chuleta de 1 página** (tabla de extensiones + diagrama rápido de modos/CSRs/RVWMO) para pegar en tu serie de ESP32+Rust.
 
-[1]: https://en.wikipedia.org/wiki/RISC-V?utm_source=chatgpt.com "RISC-V"
-[2]: https://es.wikipedia.org/wiki/RISC-V?utm_source=chatgpt.com "RISC-V"
-[3]: https://github.com/riscv/riscv-isa-manual/releases/download/Priv-v1.12/riscv-privileged-20211203.pdf?utm_source=chatgpt.com "riscv-privileged-20211203.pdf"
-[4]: https://docs.riscv.org/reference/isa/unpriv/rvwmo.html?utm_source=chatgpt.com "RVWMO Memory Consistency Model, Version 2.0"
+[1]: https://en.wikipedia.org/wiki/RISC-V "RISC-V"
+[2]: https://es.wikipedia.org/wiki/RISC-V "RISC-V"
+[3]: https://github.com/riscv/riscv-isa-manual/releases/download/Priv-v1.12/riscv-privileged-20211203.pdf "riscv-privileged-20211203.pdf"
+[4]: https://docs.riscv.org/reference/isa/unpriv/rvwmo.html "RVWMO Memory Consistency Model, Version 2.0"
 
 Aquí va la **comparativa al grano** entre **Xtensa (ESP32 clásicos: ESP32/-S2/-S3)** y **RISC-V (ESP32-C3/-C6/-H2)**, centrada en la *arquitectura* (no en periféricos concretos del chip):
 
-# Xtensa vs RISC-V — síntesis rápida
+## Xtensa vs RISC-V — síntesis rápida
 
 | Aspecto                        | Xtensa (Cadence)                                                                                                    | RISC-V (open ISA)                                                                                     |
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
