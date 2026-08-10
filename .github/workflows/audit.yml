@@ -1,0 +1,75 @@
+name: Scheduled repository audit
+
+on:
+  schedule:
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: repository-audit
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  audit:
+    name: audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      HUGO_VERSION: 0.164.0
+      HUGO_SHA256: fea17b8c076f950bb2e9f9486667bdaa29422883888d509d63931c73e8a9b3a4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+
+      - name: Install Hugo
+        run: |
+          archive="${RUNNER_TEMP}/hugo.tar.gz"
+          curl --fail --location --retry 3 --silent --show-error \
+            "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz" \
+            --output "${archive}"
+          echo "${HUGO_SHA256}  ${archive}" | sha256sum --check
+          tar -xzf "${archive}" -C "${RUNNER_TEMP}" hugo
+          echo "${RUNNER_TEMP}" >> "${GITHUB_PATH}"
+
+      - name: Verify Hugo freshness
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          latest="$(gh api repos/gohugoio/hugo/releases/latest --jq .tag_name)"
+          test "v${HUGO_VERSION}" = "${latest}" || {
+            echo "Hugo ${HUGO_VERSION} is stale; latest is ${latest}." >&2
+            exit 1
+          }
+
+      - name: Build all content
+        env:
+          HUGO_CACHEDIR: ${{ runner.temp }}/hugo-cache
+          HUGO_ENVIRONMENT: production
+        run: |
+          hugo \
+            --buildDrafts \
+            --buildFuture \
+            --destination "${RUNNER_TEMP}/all-content" \
+            --gc \
+            --minify \
+            --panicOnWarning
+
+      - name: Check internal links
+        run: node scripts/check-site-links.mjs "${RUNNER_TEMP}/all-content"
+
+      - name: Check external links
+        run: node scripts/check-external-links.mjs content
