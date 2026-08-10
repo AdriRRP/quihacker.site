@@ -1,59 +1,75 @@
-name: Deploy Hugo to GitHub Pages
+name: CI and deploy Hugo to GitHub Pages
 
 on:
+  pull_request:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
-  cancel-in-progress: true
+  group: pages-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+defaults:
+  run:
+    shell: bash
 
 jobs:
   build:
+    name: build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      HUGO_VERSION: 0.150.0
+      HUGO_SHA256: d7348b78e8bbaf41a5ead308d3d4108bf18f2fb3fa203d3f0d99afa1c00bd096
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          submodules: 'recursive'   # si el tema está como submódulo
-          fetch-depth: 0
+          persist-credentials: false
 
-      # Habilita Pages (por si no lo hiciste en Settings)
-      - id: pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
+      - name: Install Hugo
+        run: |
+          archive="${RUNNER_TEMP}/hugo.tar.gz"
+          curl --fail --location --retry 3 --silent --show-error \
+            "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz" \
+            --output "${archive}"
+          echo "${HUGO_SHA256}  ${archive}" | sha256sum --check
+          tar -xzf "${archive}" -C "${RUNNER_TEMP}" hugo
+          echo "${RUNNER_TEMP}" >> "${GITHUB_PATH}"
 
-      - uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: '0.150.0'
-          extended: true
+      - name: Verify deployment metadata
+        run: |
+          test "$(tr -d '\r\n' < static/CNAME)" = "quihacker.site"
 
       - name: Build
-        # Para project pages: genera con base_url correcto (ej: https://adrirrp.github.io/quihacker.site/)
-        # run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
-        run: hugo --minify --baseURL "https://quihacker.site/"
-        # ───────────────────────────────────────────────────────────────
-        # Cuando pases a dominio propio (quihacker.site), usa en su lugar:
-        # run: hugo --minify --baseURL "https://quihacker.site/"
-        # ───────────────────────────────────────────────────────────────
+        env:
+          HUGO_CACHEDIR: ${{ runner.temp }}/hugo-cache
+          HUGO_ENVIRONMENT: production
+        run: hugo --gc --minify --panicOnWarning
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Upload Pages artifact
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: ./public
 
   deploy:
+    name: deploy
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
