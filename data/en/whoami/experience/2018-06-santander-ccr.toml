@@ -3,7 +3,7 @@ title     = "Software/Data Engineer | Counterparty Credit Risk"
 url       = "https://www.santander.com/"
 start     = "2018-06"
 end       = "2021-06"
-role_icon = "/images/role/sw-engineer.png"
+role_icon = "/images/role/sw-engineer.webp"
 highlights = [
   "Designed/implemented risk engines (CEM, SA-CCR, Settlement Risk; metrics such as EAD) for regulatory/internal requirements.",
   "Unified Spark framework enabling quants/business to contribute code.",

@@ -2,7 +2,7 @@ description = "Bitácora técnica de Adrian \"Quihacker\" Ramos sobre Rust, hard
 author = "Adrian Ramos"
 keywords = ["Rust", "hardware hacking", "ESP32", "software architecture", "cybersecurity", "event sourcing", "DDD", "AI"]
 
-label.icon = "/images/logo.png"
+label.icon = "/images/logo.webp"
 label.iconHeight = 45
 
 ShowBreadCrumbs = true
@@ -20,7 +20,7 @@ safari_pinned_tab = "/favicon-32x32.png"
 [schema]
 publisherType = "Person"
 publisherName = "Adrian Ramos"
-image = "/images/landing.png"
+image = "/images/landing.webp"
 sameAs = [
   "https://www.linkedin.com/in/adrian-ramos-rp",
   "https://github.com/AdriRRP",
@@ -28,7 +28,7 @@ sameAs = [
 
 [profileMode]
 enabled = true
-imageUrl = "/images/landing.png"
+imageUrl = "/images/landing.webp"
 imageTitle = "Quihacker & Sancho (toolkit)"
 imageWidth = 300
 imageHeight = 300

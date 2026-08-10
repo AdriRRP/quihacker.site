@@ -10,14 +10,14 @@ series:
   - esp32-hardware-hacking-rust
 series_weight: 1
 cover:
-  image: "/images/posts/esp32-hardware-hacking-rust/01-introduction.png"
+  image: "images/posts/esp32-hardware-hacking-rust/01-introduction.webp"
   alt: "MCU (Food Truck) VS MPU (Restaurant) - Quihacker"
   caption: "Food Truck (MCU) VS Restaurant (MPU)"
   relative: false
   hidden: false
   hiddenInList: false
   hiddenInSingle: false
-images: ["/images/posts/esp32-hardware-hacking-rust/01-introduction.png"]
+images: ["images/posts/esp32-hardware-hacking-rust/01-introduction.webp"]
 ---
 
 WIP

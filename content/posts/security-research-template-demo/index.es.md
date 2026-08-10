@@ -6,8 +6,8 @@ description = "Artículo de ejemplo para validar el arquetipo de research: jerar
 summary = "Una demo realista para comprobar cómo se lee y se navega un artículo largo de investigación técnica en Quihacker's Lab."
 tags = ['cybersecurity', 'hardware-hacking', 'research']
 ShowToc = true
-cover = { image = '/images/landing.png', alt = 'Demo visual del arquetipo de research', caption = 'Portada temporal para validar composición y jerarquía', relative = false, hidden = false, hiddenInList = false, hiddenInSingle = false }
-images = ['/images/landing.png']
+cover = { image = '/images/landing.webp', alt = 'Demo visual del arquetipo de research', caption = 'Portada temporal para validar composición y jerarquía', relative = false, hidden = false, hiddenInList = false, hiddenInSingle = false }
+images = ['/images/landing.webp']
 +++
 
 ## El hallazgo en una frase

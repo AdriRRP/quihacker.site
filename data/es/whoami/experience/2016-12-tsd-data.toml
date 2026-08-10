@@ -3,7 +3,7 @@ title     = "Junior Data Engineer | Big Data Training & Financial Risk"
 url       = "https://www.tsdconsulting.es/"
 start     = "2016-12"
 end       = "2017-06"
-role_icon = "/images/role/data-engineer.png"
+role_icon = "/images/role/data-engineer.webp"
 highlights = [
   "Formación intensiva y primeros proyectos en Spark, Kafka, ML y ecosistema Cloudera en riesgo financiero.",
   "Exposición temprana a casos de uso de datos distribuidos a gran escala."

@@ -10,14 +10,14 @@ series:
   - esp32-hardware-hacking-rust
 series_weight: 2
 cover:
-  image: "/images/posts/esp32-hardware-hacking-rust/02-esp32-family.png"
+  image: "images/posts/esp32-hardware-hacking-rust/02-esp32-family.webp"
   alt: "ESP32 Family - Quihacker"
   caption: "ESP32 Family"
   relative: false
   hidden: false
   hiddenInList: false
   hiddenInSingle: false
-images: ["/images/posts/esp32-hardware-hacking-rust/02-esp32-family.png"]
+images: ["images/posts/esp32-hardware-hacking-rust/02-esp32-family.webp"]
 ---
 
 WIP

@@ -10,14 +10,14 @@ series:
   - esp32-hardware-hacking-rust
 series_weight: 3
 cover:
-  image: "/images/posts/esp32-hardware-hacking-rust/03-hardware.png"
+  image: "images/posts/esp32-hardware-hacking-rust/03-hardware.webp"
   alt: "Hardware del ESP32 - Quihacker"
   caption: "Hardware del ESP32 Hardware"
   relative: false
   hidden: false
   hiddenInList: false
   hiddenInSingle: false
-images: ["/images/posts/esp32-hardware-hacking-rust/03-hardware.png"]
+images: ["images/posts/esp32-hardware-hacking-rust/03-hardware.webp"]
 ---
 
 Análisis de placas y datasheets

@@ -10,14 +10,14 @@ series:
   - esp32-hardware-hacking-rust
 series_weight: 2
 cover:
-  image: "/images/posts/esp32-hardware-hacking-rust/02-esp32-family.png"
+  image: "images/posts/esp32-hardware-hacking-rust/02-esp32-family.webp"
   alt: "Familia ESP32 - Quihacker"
   caption: "Familia ESP32"
   relative: false
   hidden: false
   hiddenInList: false
   hiddenInSingle: false
-images: ["/images/posts/esp32-hardware-hacking-rust/02-esp32-family.png"]
+images: ["images/posts/esp32-hardware-hacking-rust/02-esp32-family.webp"]
 ---
 
 ## ESP32-WROOM32

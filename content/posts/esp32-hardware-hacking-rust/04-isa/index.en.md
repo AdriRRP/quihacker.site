@@ -10,14 +10,14 @@ series:
   - esp32-hardware-hacking-rust
 series_weight: 4
 cover:
-  image: "/images/posts/esp32-hardware-hacking-rust/04-isa.png"
+  image: "images/posts/esp32-hardware-hacking-rust/04-isa.webp"
   alt: "The ESP32 ISA - Quihacker"
   caption: "The ESP32 ISA"
   relative: false
   hidden: false
   hiddenInList: false
   hiddenInSingle: false
-images: ["/images/posts/esp32-hardware-hacking-rust/04-isa.png"]
+images: ["images/posts/esp32-hardware-hacking-rust/04-isa.webp"]
 ---
 
 WIP
