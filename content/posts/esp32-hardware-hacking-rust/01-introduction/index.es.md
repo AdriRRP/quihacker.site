@@ -20,7 +20,7 @@ cover:
 images: ["images/posts/esp32-hardware-hacking-rust/01-introduction.webp"]
 ---
 
-# MCU vs MPU: el **food truck**  y el **restaurante**
+## MCU vs MPU: el **food truck** y el **restaurante**
 
 Piensa en un **microcontrolador (MCU)** como un **food truck**: pequeño, autosuficiente, con todo lo necesario integrado para cocinar **una cosa muy bien** y **en el acto**.
 Un **microprocesador/SoC (MPU)** es un **restaurante**: enorme, con cocina industrial, personal, normas, reservas y un menú inmenso… pero con **burocracia** y tiempos.
