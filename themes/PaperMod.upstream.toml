@@ -9,7 +9,7 @@ imported_on = "2025-10-15"
 # Upstream was reviewed through this commit. It is not yet safe to import; see
 # docs/THEME_MAINTENANCE.md for the compatibility findings and update process.
 last_reviewed_commit = "d3768854d00ad003b0a8dbdba254ce9224377a01"
-last_reviewed_on = "2026-08-10"
+last_reviewed_on = "2026-08-31"
 
 [[local_patches]]
 commit = "24406f3ccacd4972e836fdad453d2a4f74cdadef"
