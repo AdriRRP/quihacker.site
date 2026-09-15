@@ -8,7 +8,7 @@ pragmatic AI.
 
 ## Stack
 
-- Hugo Extended 0.165.0
+- Hugo Extended 0.166.0
 - vendored PaperMod theme plus local layout overrides
 - GitHub Actions and GitHub Pages
 - Spanish as the default language under `/es/`, with English under `/en/`
@@ -46,7 +46,7 @@ content:
 DRAFTS=1 ./run.sh
 ```
 
-If Hugo Extended 0.165.0 is installed locally, the production-equivalent build
+If Hugo Extended 0.166.0 is installed locally, the production-equivalent build
 is:
 
 ```bash
