@@ -18,14 +18,23 @@ file.
 ## Upstream review status
 
 Upstream was reviewed through
-`d3768854d00ad003b0a8dbdba254ce9224377a01` on 2026-08-10. A direct replacement
-was intentionally rejected because it fails the strict Hugo 0.164 build and
-breaks current overrides:
+`26523e0fd837f965d08e320c9dde83700ad15649` on 2026-10-25. The review covered
+the template, CSS, workflow, JavaScript, and license delta from both the
+vendored revision and the previous review horizon. A direct replacement was
+again intentionally rejected because it would break current overrides:
 
-- upstream still uses the deprecated `.Language.LanguageDirection` API;
-- layouts moved from `_default`/`partials` to the Hugo 0.146 layout structure;
+- upstream has completed its Hugo API migration and now requires Hugo 0.158 or
+  newer, which is compatible with this repository's Hugo 0.168 baseline;
+- layouts moved from `_default`/`partials` to the current Hugo layout structure,
+  so the local layouts must be ported before they can override the theme again;
 - the removed scrollbar resource is still consumed by the local head override;
-- upstream's `data-theme` toggle must be reconciled with local `.dark` styles.
+- upstream's `data-theme` toggle must be reconciled with local `.dark` styles
+  and the Mermaid theme integration.
+
+Changes since the previous review are maintenance-only: Hugo API migrations,
+accessibility fixes, template allocation reductions, cover-image processing,
+TOC handling, date metadata formatting, and CSS cleanup. No new JavaScript,
+license, or supply-chain changes were introduced in that interval.
 
 Treat the next import as a theme migration, not as a file copy.
 
